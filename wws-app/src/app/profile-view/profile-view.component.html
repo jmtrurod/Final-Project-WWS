@@ -1,0 +1,21 @@
+<app-navbar></app-navbar>
+<button (click)="toCity()">TO CITY</button>
+<div class="background-profile">
+    <app-profile-header [user]="user" *ngIf="user!==undefined"></app-profile-header>
+    <app-create-post-form (postEmiter)="updateList($event)" [username]="user.username" *ngIf="user!=undefined"></app-create-post-form>
+    <div class="buttons">
+        <button type="button" class="btn btn-light btn-circle btn-xl" (click)="filterByTheme('ALL')">ALL</button>
+        <button type="button" class="btn btn-primary btn-circle btn-xl" (click)="filterByTheme('FOOD')">FOOD</button>
+        <button type="button" class="btn btn-success btn-circle btn-xl" (click)="filterByTheme('LEISURE')">LEISURE</button>
+        <button type="button" class="btn btn-danger btn-circle btn-xl" (click)="filterByTheme('CULTURE')">CULTURE</button>
+        <button type="button" class="btn btn-warning btn-circle btn-xl" (click)="filterByTheme('SPORT')">SPORT</button>
+    </div>
+
+    <div *ngIf="postsAndUsers.length!==0">
+        <div *ngFor="let pas of postsAndUsers">
+            <app-post-card [postAndUser]="pas" [service]="'profile'"></app-post-card>
+        </div>
+    </div>
+
+    <br>
+</div>

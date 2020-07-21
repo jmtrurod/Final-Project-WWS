@@ -1,0 +1,197 @@
+html {
+    height: 100%;
+}
+
+body{
+    height: 100%;
+}
+
+img.logo {
+    width: 7rem;
+}
+
+.city-header{
+    width: 100%;
+    min-height: 15rem;
+    display: flex;
+    padding: 2%;
+}
+
+.city-name{
+    color: #5D6063;
+    margin-right: 15%;
+    margin-left: 2%;
+}
+
+.background-img {
+    background-image: url("assets/img/londres.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}
+
+.btn-circle.btn-xl { 
+    width: 100px; 
+    height: 100px; 
+    padding: 10px 16px; 
+    border-radius: 50%; 
+    font-size: 12px;
+    text-align: center; 
+    margin-left: 1.5%;
+    margin-right: 1.5%;
+    font-weight: bold;
+    font-family: 'B612';
+}
+
+.buttons{
+    padding: 5%;
+    text-align: center;
+}
+
+.card{
+    width: 70%;
+    margin: auto;
+    margin-bottom: 3.5%;
+}
+
+.footer{
+    display: flex;
+}
+
+.thumbs-up{
+    background-color: transparent;
+    border: transparent;
+    color: green;
+    font-size: 150%;
+}
+
+.thumbs-down{
+    background-color: transparent;
+    border: transparent;
+    color: red;
+    font-size: 150%;
+}
+
+.title-and-link{
+    display: flex;
+}
+
+.karma{
+    display: flex;
+    margin-left:auto;
+    margin-right: 0;
+}
+
+.link-webpage{
+    margin-left:auto;
+    margin-right: 0;
+}
+
+.card-username, .card-city-country{
+    margin-left: 1rem;
+    color: #5D6063;
+    font-style: italic;
+}
+
+.karma-int{
+    font-weight: bold;
+    margin-right: 1rem;
+    font-style: italic;
+}
+
+.card-user{
+    display: flex;
+}
+
+.card-pic{
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    border: solid white;
+}
+
+.food-card{
+    background-color: #E7F0FE;
+}
+
+.sport-card{
+    background-color: #FFFBEE;
+}
+
+.leisure-card{
+    background-color: #F7FFEE;
+}
+
+.culture-card{
+    background-color: #FFF1EE;
+}
+
+.profile-header{
+    background-color: #7298C1;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    height: 30rem;
+    text-align: center;
+    color: white;
+}
+
+.profile-pic{
+    border: solid;
+    border-width: 0.5rem;
+    border-color: white;
+    border-radius: 50%;
+    height: 12rem;
+    width: 12rem;
+    margin-top: 3rem;
+}
+
+.profile-name{
+    margin-top: 1rem;
+    font-size: large;
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.profile-bio{
+    margin: auto !important;
+    margin-top: 2rem;
+    width: 60%;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-style: italic;
+    text-align: center;
+}
+.background-profile {
+    background-color: #D4DDE6;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}
+
+.form-create-post{
+    width: 70%;
+    margin: auto;
+    margin-top: 2rem;
+}
+
+.form-post-open{
+    margin-left: auto;
+    font-size: 150%;
+    font-weight: 900;
+    color: blue;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.form-post-open:hover{
+    color: darkred;
+}
+
+mat-form-field{
+    width: 100%;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

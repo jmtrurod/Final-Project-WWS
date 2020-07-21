@@ -1,0 +1,23 @@
+<div class=background-login>
+  <form class='login-form' [formGroup]="myForm" (ngSubmit)="submit()">
+    <div class="create-fields">
+      <div class="field">
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Username</mat-label>
+          <input matInput placeholder="Enter a username..." formControlName="username">
+          <mat-error *ngIf="username.invalid">
+            Whatever
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" placeholder="Enter password..." formControlName="password">
+          <mat-error *ngIf="password.invalid">
+            Whatever
+          </mat-error>
+        </mat-form-field>
+        <button mat-button [disabled]="!isValid" (click)="submit()">LOGIN</button>
+      </div>
+    </div>
+  </form>
+</div>
