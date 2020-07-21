@@ -2,6 +2,9 @@ package com.ironhack.edgeservice.model;
 
 import com.ironhack.edgeservice.enums.Theme;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Post {
     private Long id;
     private String username;
@@ -12,6 +15,7 @@ public class Post {
     private int karma;
     private String content;
     private String title;
+    private List<String> votingUsers;
 
     public Post() {}
 
@@ -24,6 +28,7 @@ public class Post {
         this.content = content;
         this.title = title;
         this.karma = 0;
+        this.votingUsers = new ArrayList<String>();
     }
 
     public Long getId() {
@@ -96,5 +101,13 @@ public class Post {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public List<String> getVotingUsers() {
+        return votingUsers;
+    }
+
+    public void setVotingUsers(List<String> votingUsers) {
+        this.votingUsers = votingUsers;
     }
 }

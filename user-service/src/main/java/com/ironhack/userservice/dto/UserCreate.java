@@ -8,10 +8,10 @@ import javax.validation.constraints.Size;
 public class UserCreate {
     @NotNull
     @Size(min = 6, max = 15, message = "Username must be composed by 6-15 characters")
-    @Pattern(regexp = "/^\\S*$/", message = "User name must not contain whitespace")
+    //@Pattern(regexp = "/^\\S*$/", message = "User name must not contain whitespace")
     private String username;
     @NotNull
-    @Pattern(regexp = "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$", message = "Enter valid name")
+    //@Pattern(regexp = "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$", message = "Enter valid name")
     private String name;
     @NotNull
     @Size(min = 5, max = 140, message = "Biography must have be composed by 5-140 characters")

@@ -25,6 +25,11 @@ public class CityService {
         return cityRepository.save(new City(cityCreate.getCity(), cityCreate.getCountry(), cityCreate.getPic(), cityCreate.getDescription()));
     }
 
+    public City findById(String cityId){
+        return cityRepository.findById(cityId)
+                .orElseThrow(()-> new InputNotAllowed(cityId + " doesn't exist"));
+    }
+
     public void updateDescription(String id, DescriptionDto descriptionDto){
         City city = cityRepository.findById(id)
                 .orElseThrow(()-> new InputNotAllowed(id + " doesn't exist"));
@@ -39,9 +44,9 @@ public class CityService {
         cityRepository.save(city);
     }
 
-    public List<String[]> getAllCities(){
-        List<String[]> cities = new ArrayList<String[]>();
-        cityRepository.findAll().forEach(c -> cities.add(new String[]{c.getCity(), c.getCountry()}));
+    public List<String> getAllCities(){
+        List<String> cities = new ArrayList<String>();
+        cityRepository.findAll().forEach(c -> cities.add(c.getId()));
         return cities;
     }
 }

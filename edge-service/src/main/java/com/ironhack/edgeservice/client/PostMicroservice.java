@@ -1,15 +1,13 @@
 package com.ironhack.edgeservice.client;
 
-import com.ironhack.edgeservice.dto.CityAndThemeDto;
 import com.ironhack.edgeservice.dto.ContentDto;
-import com.ironhack.edgeservice.dto.PersonAndThemeDto;
 import com.ironhack.edgeservice.dto.PostCreate;
+import com.ironhack.edgeservice.enums.Theme;
 import com.ironhack.edgeservice.model.Post;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @FeignClient(name = "post-service")
@@ -28,29 +26,29 @@ public interface PostMicroservice {
 
     @PutMapping("/posts/increment/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void incrementKarma(@PathVariable(name = "id") Long id);
+    public void incrementKarma(@PathVariable(name = "id") Long id, @RequestParam(name = "username") String username);
 
     @PutMapping("/posts/decrement/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void decrementKarma(@PathVariable(name = "username") Long id);
+    public void decrementKarma(@PathVariable(name = "id") Long id, @RequestParam(name = "username") String username);
 
     @DeleteMapping("/posts/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deletePost(@PathVariable(name = "id") Long id);
 
-    @GetMapping("/posts/city")
+    @GetMapping("/posts/city/{cityId}")
     @ResponseStatus(HttpStatus.OK)
-    public List<Post> postsByCity(@RequestBody String cityId);
+    public List<Post> postsByCity(@PathVariable(name = "cityId") String cityId);
 
     @GetMapping("/posts/city/theme")
     @ResponseStatus(HttpStatus.OK)
-    public List<Post> postsByCityAndTheme(@RequestBody @Valid CityAndThemeDto cityAndThemeDto);
+    public List<Post> postsByCityAndTheme(@RequestParam(name = "cityId") String cityId, @RequestParam(name = "theme") Theme theme);
 
-    @GetMapping("/posts/person")
+    @GetMapping("/posts/person/{username}")
     @ResponseStatus(HttpStatus.OK)
-    public List<Post> postsByPerson(@RequestBody String username);
+    public List<Post> postsByPerson(@PathVariable(name = "username") String username);
 
     @GetMapping("/posts/person/theme")
     @ResponseStatus(HttpStatus.OK)
-    public List<Post> postsByPersonAndTheme(@RequestBody @Valid PersonAndThemeDto personAndThemeDto);
+    public List<Post> postsByPersonAndTheme(@RequestParam(name = "username") String username, @RequestParam(name = "theme") Theme theme);
 }

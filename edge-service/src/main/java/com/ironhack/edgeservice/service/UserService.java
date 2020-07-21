@@ -1,4 +1,5 @@
 package com.ironhack.edgeservice.service;
+import com.ironhack.edgeservice.client.SecurityMicroservice;
 import com.ironhack.edgeservice.client.UserMicroservice;
 import com.ironhack.edgeservice.dto.BioDto;
 import com.ironhack.edgeservice.dto.UserCreate;
@@ -14,63 +15,71 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     private UserMicroservice userMicroservice;
+    @Autowired
+    private SecurityMicroservice securityMicroservice;
 
-    @HystrixCommand(fallbackMethod = "UserMicroserviceFail")
-    public boolean isUp(){
-        return userMicroservice.isUp();
-    }
+//    @HystrixCommand(fallbackMethod = "UserMicroserviceFail")
+//    public boolean isUp(){
+//        return userMicroservice.isUp();
+//    }
 
     @HystrixCommand(fallbackMethod = "UserMicroserviceFail2")
-    public User getUser(String username){
+    public User getUser(String username, String authorizationHeader){
+        securityMicroservice.isAdminOrUser(authorizationHeader);
         return userMicroservice.findById(username);
     }
 
     @HystrixCommand(fallbackMethod = "UserMicroserviceFail")
-    public User createUser(UserCreate userCreate){
+    public User createUser(UserCreate userCreate, String authorizationHeader){
+        securityMicroservice.isAdminOrUser(authorizationHeader);
         return userMicroservice.createUser(userCreate);
     }
 
     @HystrixCommand(fallbackMethod = "UserMicroserviceFail")
-    public void updateBio(String username, BioDto bioDto){
+    public void updateBio(String username, BioDto bioDto, String authorizationHeader){
+        securityMicroservice.isAdminOrUser(authorizationHeader);
         userMicroservice.updateBio(username, bioDto);
     }
 
     @HystrixCommand(fallbackMethod = "UserMicroserviceFail")
-    public void updatePic(String username, byte[] pic){
+    public void updatePic(String username, byte[] pic, String authorizationHeader){
+        securityMicroservice.isAdminOrUser(authorizationHeader);
         userMicroservice.updatePic(username, pic);
     }
 
     @HystrixCommand(fallbackMethod = "UserMicroserviceFail")
-    public void incrementKarma(String username){
+    public void incrementKarma(String username, String authorizationHeader){
+        securityMicroservice.isAdminOrUser(authorizationHeader);
         userMicroservice.incrementKarma(username);
     }
 
     @HystrixCommand(fallbackMethod = "UserMicroserviceFail")
-    public void decrementKarma(String username){
+    public void decrementKarma(String username, String authorizationHeader){
+        securityMicroservice.isAdminOrUser(authorizationHeader);
         userMicroservice.decrementKarma(username);
     }
 
-    public void UserMicroserviceFail(String string){
+    public void UserMicroserviceFail(String string, String string2){
         throw new UserMicroserviceFail("Failure caught by Hystrix");
     }
 
-    public void UserMicroserviceFail(String username, byte[] bits){
+    public void UserMicroserviceFail(String username, byte[] bits, String string2){
         throw new UserMicroserviceFail("Failure caught by Hystrix");
     }
 
-    public void UserMicroserviceFail(String username, BioDto bioDto){
+    public void UserMicroserviceFail(String username, BioDto bioDto, String string2){
         throw new UserMicroserviceFail("Failure caught by Hystrix");
     }
 
-    public User UserMicroserviceFail(UserCreate userCreate){
+    public User UserMicroserviceFail(UserCreate userCreate, String string2){
         throw new UserMicroserviceFail("Failure caught by Hystrix");
     }
 
-    public User UserMicroserviceFail2(String string){
+    public User UserMicroserviceFail2(String string, String string2){
         throw new UserMicroserviceFail("Failure caught by Hystrix");
     }
 
-    public boolean UserMicroserviceFail(){
+    public boolean UserMicroserviceFail(String string2){
         return false;
     }
 }

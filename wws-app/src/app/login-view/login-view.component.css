@@ -1,0 +1,18 @@
+.background-login {
+    background-image: url("../../assets/img/login.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+}
+
+.login-form{
+    width: 25%;
+    padding-top: 15%;
+    margin-left: 60%;
+}
+
+.mat-button{
+    border: solid;
+}

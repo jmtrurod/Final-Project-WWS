@@ -1,0 +1,6 @@
+<app-navbar></app-navbar>
+<ul>
+    <li *ngFor="let city of cities">
+        <button (click)="goToCity(city)">{{ city }}</button>
+    </li>
+</ul>

@@ -1,0 +1,54 @@
+<button class="form-post-open" (click)="isFormToTrue()" *ngIf="!isForm"><i class="fa fa-plus-square-o"
+        aria-hidden="true"> New POST</i></button>
+<button class="form-post-open" (click)="isFormToFalse()" *ngIf="isForm"><i class="fa fa-minus-square-o"
+        aria-hidden="true"> Close FORM</i></button>
+
+<form class='form-create-post' [formGroup]="myForm" (ngSubmit)="submitForm()" *ngIf="isForm">
+    <div class="create-title">CREATE NEW POST</div>
+    <div class="create-fields">
+        <div class="field">
+            <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Title</mat-label>
+                <input matInput placeholder="Enter a title..." formControlName="title">
+                <mat-error *ngIf="title.invalid">
+                    Min 4 characters. Max 25 characters
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="field">
+            <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>URL</mat-label>
+                <input matInput placeholder="Optional url..." formControlName="url">
+                <mat-error>
+                    Please enter an url
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="field">
+            <mat-form-field appearance="fill">
+                <mat-label>Select</mat-label>
+                <mat-select formControlName="city">
+                    <mat-option *ngFor="let city of cities" value="{{ city }}">{{ city }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="field">
+            <mat-form-field appearance="fill">
+                <mat-label>Textarea</mat-label>
+                <textarea matInput formControlName="content"></textarea>
+            </mat-form-field>
+        </div>
+        <div class="field">
+            <mat-form-field appearance="fill">
+                <mat-label>Theme</mat-label>
+                <mat-select formControlName="theme">
+                    <mat-option value='FOOD'>Food</mat-option>
+                    <mat-option value='LEISURE'>Leisure</mat-option>
+                    <mat-option value='CULTURE'>Culture</mat-option>
+                    <mat-option value='SPORT'>Sport</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <button type="submit" mat-raised-button color="primary" class="create-raised" [disabled]="myForm.invalid">SUBMIT</button>
+</form>

@@ -1,8 +1,6 @@
 package com.ironhack.postservice.service;
 
-import com.ironhack.postservice.dto.CityAndThemeDto;
 import com.ironhack.postservice.dto.ContentDto;
-import com.ironhack.postservice.dto.PersonAndThemeDto;
 import com.ironhack.postservice.dto.PostCreate;
 import com.ironhack.postservice.enums.Theme;
 import com.ironhack.postservice.exception.InputNotAllowed;
@@ -28,15 +26,17 @@ public class PostService {
         postRepository.save(post);
     }
 
-    public void incrementKarma(Long id){
+    public void incrementKarma(Long id, String username){
         Post post = postRepository.findById(id).orElseThrow(()-> new InputNotAllowed("" + id + " doesn't exist"));
         post.setKarma(post.getKarma()+1);
+        post.getVotingUsers().add(username);
         postRepository.save(post);
     }
 
-    public void decrementKarma(Long id){
+    public void decrementKarma(Long id, String username){
         Post post = postRepository.findById(id).orElseThrow(()-> new InputNotAllowed("" + id + " doesn't exist"));
         post.setKarma(post.getKarma()-1);
+        post.getVotingUsers().add(username);
         postRepository.save(post);
     }
 
@@ -53,19 +53,19 @@ public class PostService {
         return postRepository.postsByCityAndCountry(cityData[0], cityData[1]);
     }
 
-    public List<Post> postsByCityAndTheme(CityAndThemeDto cityAndThemeDto){
-        String[] cityData = cityAndThemeDto.getCityId().split("-");
+    public List<Post> postsByCityAndTheme(String cityId, Theme theme){
+        String[] cityData = cityId.split("-");
         if (cityData.length!=2){
             throw new InputNotAllowed("Input must have the following structure: city-country");
         }
-        return postRepository.postsByCityAndCountryAndTheme(cityData[0], cityData[1], cityAndThemeDto.getTheme());
+        return postRepository.postsByCityAndCountryAndTheme(cityData[0], cityData[1], theme);
     }
 
     public List<Post> postsByPerson(String username){
         return postRepository.postsByPerson(username);
     }
 
-    public List<Post> postsByPersonAndTheme(PersonAndThemeDto personAndThemeDto){
-        return postRepository.postsByPersonAndTheme(personAndThemeDto.getUsername(), personAndThemeDto.getTheme());
+    public List<Post> postsByPersonAndTheme(String username, Theme theme){
+        return postRepository.postsByPersonAndTheme(username, theme);
     }
 }

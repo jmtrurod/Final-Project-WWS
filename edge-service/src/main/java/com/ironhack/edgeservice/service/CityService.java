@@ -1,6 +1,7 @@
 package com.ironhack.edgeservice.service;
 
 import com.ironhack.edgeservice.client.CityMicroservice;
+import com.ironhack.edgeservice.client.SecurityMicroservice;
 import com.ironhack.edgeservice.dto.CityCreate;
 import com.ironhack.edgeservice.dto.DescriptionDto;
 import com.ironhack.edgeservice.exception.CityMicroserviceFail;
@@ -15,49 +16,65 @@ import java.util.List;
 public class CityService {
     @Autowired
     private CityMicroservice cityMicroservice;
+    @Autowired
+    private SecurityMicroservice securityMicroservice;
+
+//    @HystrixCommand(fallbackMethod = "CityMicroserviceFail")
+//    public boolean isUp(){
+//        return cityMicroservice.isUp();
+//    }
 
     @HystrixCommand(fallbackMethod = "CityMicroserviceFail")
-    public boolean isUp(){
-        return cityMicroservice.isUp();
+    public City findById(String cityId, String authorizationHeader){
+        securityMicroservice.isAdminOrUser(authorizationHeader);
+        return cityMicroservice.findById(cityId);
     }
 
     @HystrixCommand(fallbackMethod = "CityMicroserviceFail")
-    public City createCity(CityCreate cityCreate){
+    public City createCity(CityCreate cityCreate, String authorizationHeader){
+        securityMicroservice.isAdmin(authorizationHeader);
         return cityMicroservice.createCity(cityCreate);
     }
 
     @HystrixCommand(fallbackMethod = "CityMicroserviceFail")
-    public void updateDescription(String id, DescriptionDto descriptionDto){
+    public void updateDescription(String id, DescriptionDto descriptionDto, String authorizationHeader){
+        securityMicroservice.isAdmin(authorizationHeader);
         cityMicroservice.updateDescription(id, descriptionDto);
     }
 
     @HystrixCommand(fallbackMethod = "CityMicroserviceFail")
-    public void updatePic(String id, byte[] pic){
+    public void updatePic(String id, byte[] pic, String authorizationHeader){
+        securityMicroservice.isAdmin(authorizationHeader);
         cityMicroservice.updatePic(id, pic);
     }
 
     @HystrixCommand(fallbackMethod = "CityMicroserviceFail2")
-    public List<String[]> getAllCities(){
+    public List<String> getAllCities(String authorizationHeader){
+        securityMicroservice.isAdminOrUser(authorizationHeader);
         return cityMicroservice.getAllCities();
     }
 
-    public boolean CityMicroserviceFail(){
+    public boolean CityMicroserviceFail(String string){
         return false;
     }
 
-    public City CityMicroserviceFail(CityCreate cityCreate){
+    public City CityMicroserviceFail(CityCreate cityCreate, String string){
         throw new CityMicroserviceFail("Failure caught by Hystrix");
     }
 
-    public void CityMicroserviceFail(String string, DescriptionDto descriptionDto){
+    public void CityMicroserviceFail(String string, DescriptionDto descriptionDto, String string2){
         throw new CityMicroserviceFail("Failure caught by Hystrix");
     }
 
-    public void CityMicroserviceFail(String string, byte[] bytes){
+    public void CityMicroserviceFail(String string, byte[] bytes, String string2){
         throw new CityMicroserviceFail("Failure caught by Hystrix");
     }
 
-    public List<String[]> CityMicroserviceFail2(){
+    public List<String> CityMicroserviceFail2(String string){
+        throw new CityMicroserviceFail("Failure caught by Hystrix");
+    }
+
+    public City CityMicroserviceFail(String cityId, String string){
         throw new CityMicroserviceFail("Failure caught by Hystrix");
     }
 }

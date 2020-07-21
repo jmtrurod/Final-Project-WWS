@@ -1,9 +1,8 @@
 package com.ironhack.postservice.controller;
 
-import com.ironhack.postservice.dto.CityAndThemeDto;
 import com.ironhack.postservice.dto.ContentDto;
-import com.ironhack.postservice.dto.PersonAndThemeDto;
 import com.ironhack.postservice.dto.PostCreate;
+import com.ironhack.postservice.enums.Theme;
 import com.ironhack.postservice.model.Post;
 import com.ironhack.postservice.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController
@@ -38,14 +38,14 @@ public class PostController {
 
     @PutMapping("/posts/increment/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void incrementKarma(@PathVariable(name = "id") Long id){
-        postService.incrementKarma(id);
+    public void incrementKarma(@PathVariable(name = "id") Long id, @RequestParam(name = "username") String username){
+        postService.incrementKarma(id, username);
     }
 
     @PutMapping("/posts/decrement/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void decrementKarma(@PathVariable(name = "username") Long id){
-        postService.decrementKarma(id);
+    public void decrementKarma(@PathVariable(name = "id") Long id, @RequestParam(name = "username") String username){
+        postService.decrementKarma(id, username);
     }
 
     @DeleteMapping("/posts/{id}")
@@ -54,27 +54,27 @@ public class PostController {
         postService.deletePost(id);
     }
 
-    @GetMapping("/posts/city")
+    @GetMapping("/posts/city/{cityId}")
     @ResponseStatus(HttpStatus.OK)
-    public List<Post> postsByCity(@RequestBody String cityId){
+    public List<Post> postsByCity(@PathVariable(name = "cityId") @NotNull String cityId){
         return postService.postsByCity(cityId);
     }
 
     @GetMapping("/posts/city/theme")
     @ResponseStatus(HttpStatus.OK)
-    public List<Post> postsByCityAndTheme(@RequestBody @Valid CityAndThemeDto cityAndThemeDto){
-        return postService.postsByCityAndTheme(cityAndThemeDto);
+    public List<Post> postsByCityAndTheme(@RequestParam(name = "cityId") String cityId, @RequestParam(name = "theme") Theme theme){
+        return postService.postsByCityAndTheme(cityId, theme);
     }
 
-    @GetMapping("/posts/person")
+    @GetMapping("/posts/person/{username}")
     @ResponseStatus(HttpStatus.OK)
-    public List<Post> postsByPerson(@RequestBody String username){
+    public List<Post> postsByPerson(@PathVariable(name = "username") @NotNull String username){
         return postService.postsByPerson(username);
     }
 
     @GetMapping("/posts/person/theme")
     @ResponseStatus(HttpStatus.OK)
-    public List<Post> postsByPersonAndTheme(@RequestBody @Valid PersonAndThemeDto personAndThemeDto){
-        return postService.postsByPersonAndTheme(personAndThemeDto);
+    public List<Post> postsByPersonAndTheme(@RequestParam(name = "username") String username, @RequestParam(name = "theme") Theme theme){
+        return postService.postsByPersonAndTheme(username, theme);
     }
 }

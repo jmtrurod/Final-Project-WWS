@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 @RestController
 public class UserController {
     @Autowired
@@ -27,19 +30,19 @@ public class UserController {
 
     @PostMapping("/users/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public User createUser(@RequestBody UserCreate userCreate){
+    public User createUser(@RequestBody @Valid UserCreate userCreate){
         return userService.createUser(userCreate);
     }
 
     @PatchMapping("/users/bio/{username}")
     @ResponseStatus(HttpStatus.OK)
-    public void updateBio(@PathVariable(name = "username") String username, @RequestBody BioDto bioDto){
+    public void updateBio(@PathVariable(name = "username") String username, @RequestBody @Valid BioDto bioDto){
         userService.updateBio(username, bioDto);
     }
 
     @PatchMapping("/users/pic/{username}")
     @ResponseStatus(HttpStatus.OK)
-    public void updatePic(@PathVariable(name = "username") String username, @RequestBody byte[] pic){
+    public void updatePic(@PathVariable(name = "username") String username, @RequestBody @NotNull byte[] pic){
         userService.updatePic(username, pic);
     }
 

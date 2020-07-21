@@ -15,6 +15,10 @@ public interface CityMicroservice {
     @ResponseStatus(HttpStatus.OK)
     public boolean isUp();
 
+    @GetMapping("/cities/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public City findById(@PathVariable(name = "id") String id);
+
     @PostMapping("/cities")
     @ResponseStatus(HttpStatus.CREATED)
     public City createCity(@RequestBody CityCreate cityCreate);
@@ -29,5 +33,5 @@ public interface CityMicroservice {
 
     @GetMapping("/cities")
     @ResponseStatus(HttpStatus.OK)
-    public List<String[]> getAllCities();
+    public List<String> getAllCities();
 }

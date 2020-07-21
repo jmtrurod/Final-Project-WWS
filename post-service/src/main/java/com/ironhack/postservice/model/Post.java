@@ -3,6 +3,8 @@ package com.ironhack.postservice.model;
 import com.ironhack.postservice.enums.Theme;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Post {
@@ -18,6 +20,8 @@ public class Post {
     private int karma;
     private String content;
     private String title;
+    @ElementCollection
+    private List<String> votingUsers;
 
     public Post() {}
 
@@ -30,6 +34,7 @@ public class Post {
         this.content = content;
         this.title = title;
         this.karma = 0;
+        this.votingUsers = new ArrayList<String>();
     }
 
     public Long getId() {
@@ -94,6 +99,14 @@ public class Post {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public List<String> getVotingUsers() {
+        return votingUsers;
+    }
+
+    public void setVotingUsers(List<String> votingUsers) {
+        this.votingUsers = votingUsers;
     }
 
     public String getTitle() {

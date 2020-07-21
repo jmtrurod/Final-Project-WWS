@@ -8,50 +8,51 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/users/isup")
-    @ResponseStatus(HttpStatus.OK)
-    public boolean isUp(){
-        return userService.isUp();
-    }
+//    @GetMapping("/users/isup")
+//    @ResponseStatus(HttpStatus.OK)
+//    public boolean isUp(){
+//        return userService.isUp();
+//    }
 
     @GetMapping("/users/{username}")
     @ResponseStatus(HttpStatus.OK)
-    public User findById(@PathVariable(name = "username") String username){
-        return userService.getUser(username);
+    public User findById(@PathVariable(name = "username") String username, @RequestHeader(value = "Authorization") String authorizationHeader){
+        return userService.getUser(username, authorizationHeader);
     }
 
     @PostMapping("/users/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public User createUser(@RequestBody UserCreate userCreate){
-        return userService.createUser(userCreate);
+    public User createUser(@RequestBody UserCreate userCreate, @RequestHeader(value = "Authorization") String authorizationHeader){
+        return userService.createUser(userCreate,authorizationHeader);
     }
 
     @PatchMapping("/users/bio/{username}")
     @ResponseStatus(HttpStatus.OK)
-    public void updateBio(@PathVariable(name = "username") String username, @RequestBody BioDto bioDto){
-        userService.updateBio(username, bioDto);
+    public void updateBio(@PathVariable(name = "username") String username, @RequestBody BioDto bioDto, @RequestHeader(value = "Authorization") String authorizationHeader){
+        userService.updateBio(username, bioDto, authorizationHeader);
     }
 
     @PatchMapping("/users/pic/{username}")
     @ResponseStatus(HttpStatus.OK)
-    public void updatePic(@PathVariable(name = "username") String username, @RequestBody byte[] pic){
-        userService.updatePic(username, pic);
+    public void updatePic(@PathVariable(name = "username") String username, @RequestBody byte[] pic, @RequestHeader(value = "Authorization") String authorizationHeader){
+        userService.updatePic(username, pic, authorizationHeader);
     }
 
     @PutMapping("/users/increment/{username}")
     @ResponseStatus(HttpStatus.OK)
-    public void incrementKarma(@PathVariable(name = "username") String username){
-        userService.incrementKarma(username);
+    public void incrementKarma(@PathVariable(name = "username") String username, @RequestHeader(value = "Authorization") String authorizationHeader){
+        userService.incrementKarma(username, authorizationHeader);
     }
 
     @PutMapping("/users/decrement/{username}")
     @ResponseStatus(HttpStatus.OK)
-    public void decrementKarma(@PathVariable(name = "username") String username){
-        userService.decrementKarma(username);
+    public void decrementKarma(@PathVariable(name = "username") String username, @RequestHeader(value = "Authorization") String authorizationHeader){
+        userService.decrementKarma(username, authorizationHeader);
     }
 
 }
