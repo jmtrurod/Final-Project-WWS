@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.util.List;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
@@ -25,10 +28,16 @@ public class UserController {
         return userService.getUser(username, authorizationHeader);
     }
 
+    @GetMapping("/users")
+    @ResponseStatus(HttpStatus.OK)
+    public List<User> findAll(@RequestHeader(value = "Authorization") String authorizationHeader){
+        return userService.findAll(authorizationHeader);
+    };
+
     @PostMapping("/users/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public User createUser(@RequestBody UserCreate userCreate, @RequestHeader(value = "Authorization") String authorizationHeader){
-        return userService.createUser(userCreate,authorizationHeader);
+    public User createUser(@RequestBody UserCreate userCreate){
+        return userService.createUser(userCreate);
     }
 
     @PatchMapping("/users/bio/{username}")
@@ -39,7 +48,7 @@ public class UserController {
 
     @PatchMapping("/users/pic/{username}")
     @ResponseStatus(HttpStatus.OK)
-    public void updatePic(@PathVariable(name = "username") String username, @RequestBody byte[] pic, @RequestHeader(value = "Authorization") String authorizationHeader){
+    public void updatePic(@PathVariable(name = "username") String username, @RequestBody String pic, @RequestHeader(value = "Authorization") String authorizationHeader){
         userService.updatePic(username, pic, authorizationHeader);
     }
 

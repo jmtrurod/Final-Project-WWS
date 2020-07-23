@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PostAndUser } from '../Model/postAndUser.model';
 import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-post-card',
@@ -15,20 +16,28 @@ export class PostCardComponent implements OnInit {
   @Input()
   service: string;
 
+  @Output()
+  postEmiter: EventEmitter<number> = new EventEmitter<number>();
+
   cardClass: string;
   convertedImage: any;
   displayCity = false;
   allowLikes = true;
   username: string;
+  allowedUserOrAdmin = false;
 
   httpOptions = {
     headers: new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json',
-      Authorization: this.cookieService.get('auth'),
+      Authorization: this.cookieService.get('auth')
     }),
   };
 
-  constructor(private http: HttpClient, private cookieService: CookieService) {}
+  constructor(private http: HttpClient,
+              private cookieService: CookieService,
+              private router: Router,
+              private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.username = localStorage.getItem('username');
@@ -42,6 +51,9 @@ export class PostCardComponent implements OnInit {
     }
     this.cardClass = 'card ' + this.postAndUser.post.theme.toLocaleLowerCase() + '-card';
     this.convertedImage = 'data:image/jpeg;base64,' + this.postAndUser.user.pic;
+
+    this.http.get<boolean>('http://localhost:8080/users/is-admin-allowed-user?username=' + this.postAndUser.post.username, this.httpOptions)
+    .subscribe( b => this.allowedUserOrAdmin = b );
   }
 
   incrementKarma(){
@@ -72,5 +84,15 @@ export class PostCardComponent implements OnInit {
     this.postAndUser.post.karma --;
     this.allowLikes = false;
 }
+
+  goToProfile(username2: string){
+    this.router.navigate(['/profile'], {queryParams:{ username: username2 }, relativeTo: this.route});
+  }
+
+  deletePost(){
+    this.http.delete<void>('http://localhost:8080/posts/' + this.postAndUser.post.id
+    + '?username=' + localStorage.getItem('username'), this.httpOptions).subscribe();
+    this.postEmiter.emit(this.postAndUser.post.id);
+  }
 
 }

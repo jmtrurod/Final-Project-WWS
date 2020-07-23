@@ -43,7 +43,7 @@ public class CityService {
     }
 
     @HystrixCommand(fallbackMethod = "CityMicroserviceFail")
-    public void updatePic(String id, byte[] pic, String authorizationHeader){
+    public void updatePic(String id, String pic, String authorizationHeader){
         securityMicroservice.isAdmin(authorizationHeader);
         cityMicroservice.updatePic(id, pic);
     }
@@ -66,7 +66,7 @@ public class CityService {
         throw new CityMicroserviceFail("Failure caught by Hystrix");
     }
 
-    public void CityMicroserviceFail(String string, byte[] bytes, String string2){
+    public void CityMicroserviceFail(String string, String bytes, String string2){
         throw new CityMicroserviceFail("Failure caught by Hystrix");
     }
 

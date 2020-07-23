@@ -8,6 +8,7 @@ import com.ironhack.userservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,8 +17,14 @@ public class UserService {
     private UserRepository userRepository;
 
     public User getUser(String username){
+        System.out.println(username);
         User user = userRepository.findById(username).orElseThrow(() -> new InputNotAllowed(username + " is not an existing user"));
+        System.out.println(user.getName());
         return user;
+    }
+
+    public List<User> findAll(){
+        return userRepository.findAll();
     }
 
     public User createUser(UserCreate userCreate){
@@ -34,7 +41,7 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void updatePic(String username, byte[] pic){
+    public void updatePic(String username, String pic){
         User user = userRepository.findById(username).orElseThrow(() -> new InputNotAllowed(username + " is not an existing user"));
         user.setPic(pic);
         userRepository.save(user);

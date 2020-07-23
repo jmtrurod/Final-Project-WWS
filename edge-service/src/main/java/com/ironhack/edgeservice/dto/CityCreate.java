@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 public class CityCreate {
     private String city;
     private String country;
-    private byte[] pic;
+    private String pic;
     private String description;
 
     public CityCreate(){}
@@ -34,11 +34,11 @@ public class CityCreate {
         this.country = country;
     }
 
-    public byte[] getPic() {
+    public String getPic() {
         return pic;
     }
 
-    public void setPic(byte[] pic) {
+    public void setPic(String pic) {
         this.pic = pic;
     }
 

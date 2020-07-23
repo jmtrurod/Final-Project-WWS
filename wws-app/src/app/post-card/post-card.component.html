@@ -3,12 +3,13 @@
     <div class="title-and-link">
         <h5 class="card-title">{{ postAndUser.post.title }}</h5>
         <a class="link-webpage" href="{{ postAndUser.post.url }}" *ngIf="postAndUser.post.url!==''" target="_blank"><i class="fa fa-share" aria-hidden="true"></i></a>
+        <button class="delete-button" (click)="deletePost()" *ngIf="allowedUserOrAdmin">X</button>
     </div>
     <p class="card-text">{{ postAndUser.post.content }}</p>
     <div class="footer">
         <div class="card-user" *ngIf="!displayCity">
-            <img class="card-pic" src="{{ convertedImage }}">
-            <p class="card-username">{{ postAndUser.user.username }}</p>
+            <img class="card-pic" src="{{ postAndUser.user.pic }}">
+            <button (click)="goToProfile(postAndUser.user.username)"><p class="card-username">{{ postAndUser.user.username }}</p></button>
         </div>
         <div class="card-user" *ngIf="displayCity">
             <p class="card-city-country">{{ postAndUser.post.city }} - {{ postAndUser.post.country }}</p>

@@ -7,6 +7,8 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @FeignClient(name = "user-service")
 public interface UserMicroservice {
     @GetMapping("/users/isup")
@@ -16,6 +18,10 @@ public interface UserMicroservice {
     @GetMapping("/users/{username}")
     @ResponseStatus(HttpStatus.OK)
     public User findById(@PathVariable(name = "username") String username);
+
+    @GetMapping("/users")
+    @ResponseStatus(HttpStatus.OK)
+    public List<User> findAll();
 
     @PostMapping("/users/create")
     @ResponseStatus(HttpStatus.CREATED)
@@ -27,7 +33,7 @@ public interface UserMicroservice {
 
     @PatchMapping("/users/pic/{username}")
     @ResponseStatus(HttpStatus.OK)
-    public void updatePic(@PathVariable(name = "username") String username, @RequestBody byte[] pic);
+    public void updatePic(@PathVariable(name = "username") String username, @RequestBody String pic);
 
     @PutMapping("/users/increment/{username}")
     @ResponseStatus(HttpStatus.OK)

@@ -43,7 +43,7 @@ public class CityController {
 
     @PatchMapping("/cities/pic/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void updatePic(@PathVariable(name = "id") String id, @RequestBody @NotNull byte[] pic){
+    public void updatePic(@PathVariable(name = "id") String id, @RequestBody @NotNull String pic){
         cityService.updatePic(id, pic);
     }
 

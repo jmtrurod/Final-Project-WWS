@@ -3,10 +3,7 @@ package com.ironhack.edgeservice.client;
 import com.ironhack.edgeservice.model.SecurityUser;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
 @FeignClient(name = "security-service")
 public interface SecurityMicroservice {
@@ -21,4 +18,13 @@ public interface SecurityMicroservice {
     @ResponseStatus(HttpStatus.OK)
     public boolean isAllowedUser(@RequestHeader(value = "Authorization") String authorizationHeader,
                                  @RequestParam(name = "username") String username);
+
+    @GetMapping("/users/is-admin-allowed-user")
+    @ResponseStatus(HttpStatus.OK)
+    public boolean isAdminOrAllowedUser(@RequestHeader(value = "Authorization") String authorizationHeader,
+                                        @RequestParam(name = "username") String username);
+
+    @PostMapping("/users-create")
+    @ResponseStatus(HttpStatus.CREATED)
+    public SecurityUser createUser(@RequestBody SecurityUser user);
 }

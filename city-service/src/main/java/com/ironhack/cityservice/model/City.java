@@ -1,20 +1,21 @@
 package com.ironhack.cityservice.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
 
-@Entity
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "cities")
 public class City {
     @Id
     private String id;
     private String city;
     private String country;
-    private byte[] pic;
+    private String pic;
     private String description;
 
     public City(){}
 
-    public City(String city, String country, byte[] pic, String description) {
+    public City(String city, String country, String pic, String description) {
         this.city = city;
         this.country = country;
         this.pic = pic;
@@ -46,11 +47,11 @@ public class City {
         this.country = country;
     }
 
-    public byte[] getPic() {
+    public String getPic() {
         return pic;
     }
 
-    public void setPic(byte[] pic) {
+    public void setPic(String pic) {
         this.pic = pic;
     }
 

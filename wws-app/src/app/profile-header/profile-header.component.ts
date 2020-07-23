@@ -15,7 +15,7 @@ export class ProfileHeaderComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.convertedImage = 'data:image/jpeg;base64,' + this.user.pic;
+    this.convertedImage = this.user.pic;
   }
 
 }

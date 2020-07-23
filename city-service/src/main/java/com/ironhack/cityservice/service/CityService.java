@@ -37,7 +37,7 @@ public class CityService {
         cityRepository.save(city);
     }
 
-    public void updatePic(String id, byte[] pic){
+    public void updatePic(String id, String pic){
         City city = cityRepository.findById(id)
                 .orElseThrow(()-> new InputNotAllowed(id + " doesn't exist"));
         city.setPic(pic);
