@@ -1,0 +1,32 @@
+<app-navbar [mainName]="'NewCity'"></app-navbar>
+<div class=background-login>
+    <form class='login-form' [formGroup]="myForm">
+      <div class="create-fields">
+        <div class="field">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>City</mat-label>
+            <input matInput placeholder="Enter a username..." formControlName="city">
+            <mat-error *ngIf="city.invalid">
+              Whatever
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Country</mat-label>
+            <input matInput placeholder="Enter a bio..." formControlName="country">
+            <mat-error *ngIf="country.invalid">
+              Whatever
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Description</mat-label>
+            <input matInput placeholder="Enter a name..." formControlName="description">
+            <mat-error *ngIf="description.invalid">
+              Whatever
+            </mat-error>
+          </mat-form-field>
+          <input type="file" (change)="onFileChanged($event)">
+          <button mat-button [disabled]="!isValid" (click)="submit()">LOGIN</button>
+        </div>
+      </div>
+    </form>
+  </div>

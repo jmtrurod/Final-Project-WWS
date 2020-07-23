@@ -9,14 +9,14 @@ public class CityCreate {
     @NotNull
     private String country;
     @NotNull
-    private byte[] pic;
+    private String pic;
     @NotNull
     @Size(min = 50, max = 350, message = "City description must be composed by 50-350 characters")
     private String description;
 
     public CityCreate(){}
 
-    public CityCreate(@NotNull String city, @NotNull String country, @NotNull byte[] pic, @NotNull @Size(min = 50, max = 350, message = "City description must be composed by 50-350 characters") String description) {
+    public CityCreate(@NotNull String city, @NotNull String country, @NotNull String pic, @NotNull @Size(min = 50, max = 350, message = "City description must be composed by 50-350 characters") String description) {
         this.city = city;
         this.country = country;
         this.pic = pic;
@@ -39,11 +39,11 @@ public class CityCreate {
         this.country = country;
     }
 
-    public byte[] getPic() {
+    public String getPic() {
         return pic;
     }
 
-    public void setPic(byte[] pic) {
+    public void setPic(String pic) {
         this.pic = pic;
     }
 

@@ -29,7 +29,7 @@ public interface CityMicroservice {
 
     @PatchMapping("/cities/pic/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void updatePic(@PathVariable(name = "id") String id, @RequestBody byte[] pic);
+    public void updatePic(@PathVariable(name = "id") String id, @RequestBody String pic);
 
     @GetMapping("/cities")
     @ResponseStatus(HttpStatus.OK)

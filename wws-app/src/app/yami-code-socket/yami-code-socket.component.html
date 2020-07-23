@@ -1,0 +1,26 @@
+<app-navbar [mainName]="'Chat'"></app-navbar>
+<form class="somespace" [formGroup]="userForm">
+  <p>User Information: (if user id(toId) is null the message will be sended to all users) </p>
+  <div class="field">
+    <mat-form-field appearance="fill">
+        <mat-label>Select</mat-label>
+        <mat-select formControlName="toId">
+            <mat-option *ngFor="let user of allUsers" value="{{ user.username }}">{{ user.username }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+</form>
+<form [formGroup]="form" (submit)="sendMessageUsingSocket()">
+  <p>Message: </p>
+  <input type="text" formControlName="message" name="message" placeholder="Message">
+  <input type="submit" [disabled]="form.invalid || userForm.invalid" value="Send using socket subscription">
+</form>
+<ul>
+  <li *ngFor="let mau of messagesAndUsers">
+    <div class="card-user">
+      <img class="card-pic" src="{{ mau.user.pic }}">
+      <p class="card-username">{{ mau.user.username }} TO {{ mau.toUserId }} : </p>
+      <p> {{ mau.message.message }}</p>
+    </div>
+  </li>
+</ul>

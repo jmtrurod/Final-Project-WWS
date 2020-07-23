@@ -9,6 +9,8 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,13 +27,27 @@ public class UserService {
 
     @HystrixCommand(fallbackMethod = "UserMicroserviceFail2")
     public User getUser(String username, String authorizationHeader){
+        System.out.println("AAAA");
         securityMicroservice.isAdminOrUser(authorizationHeader);
+        System.out.println("BBBB");
         return userMicroservice.findById(username);
     }
 
-    @HystrixCommand(fallbackMethod = "UserMicroserviceFail")
-    public User createUser(UserCreate userCreate, String authorizationHeader){
+    @HystrixCommand(fallbackMethod = "UserMicroserviceFail2")
+    public List<User> findAll(String authorizationHeader){
         securityMicroservice.isAdminOrUser(authorizationHeader);
+        return userMicroservice.findAll();
+    }
+
+    @HystrixCommand(fallbackMethod = "UserMicroserviceFail")
+    public User createUser(UserCreate userCreate) {
+        UserCreate newUserCreate = new UserCreate(
+                userCreate.getUsername(),
+                userCreate.getName(),
+                userCreate.getBio(),
+                userCreate.getPic(),
+                userCreate.getMail()
+        );
         return userMicroservice.createUser(userCreate);
     }
 
@@ -42,7 +58,7 @@ public class UserService {
     }
 
     @HystrixCommand(fallbackMethod = "UserMicroserviceFail")
-    public void updatePic(String username, byte[] pic, String authorizationHeader){
+    public void updatePic(String username, String pic, String authorizationHeader){
         securityMicroservice.isAdminOrUser(authorizationHeader);
         userMicroservice.updatePic(username, pic);
     }
@@ -63,7 +79,11 @@ public class UserService {
         throw new UserMicroserviceFail("Failure caught by Hystrix");
     }
 
-    public void UserMicroserviceFail(String username, byte[] bits, String string2){
+    public List<User> UserMicroserviceFail2(String authorizationHeader){
+        throw new UserMicroserviceFail("Failure caught by Hystrix");
+    }
+
+    public void UserMicroserviceFail(String username, String bits, String string2){
         throw new UserMicroserviceFail("Failure caught by Hystrix");
     }
 
@@ -71,7 +91,7 @@ public class UserService {
         throw new UserMicroserviceFail("Failure caught by Hystrix");
     }
 
-    public User UserMicroserviceFail(UserCreate userCreate, String string2){
+    public User UserMicroserviceFail(UserCreate userCreate){
         throw new UserMicroserviceFail("Failure caught by Hystrix");
     }
 

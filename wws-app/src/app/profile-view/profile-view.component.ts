@@ -18,6 +18,7 @@ export class ProfileViewComponent implements OnInit {
   posts: Post[] = [];
   postsAndUsers: PostAndUser[] = [];
   user: User;
+  profileUser: string = localStorage.getItem('username');
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -32,6 +33,10 @@ export class ProfileViewComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    if (!(this.cookieService.get('auth') && localStorage.getItem('username'))){
+      this.router.navigate(['/login'], { relativeTo: this.route });
+    }
+    this.username = this.route.snapshot.queryParamMap.get('username');
     if (!this.username){
       this.username = localStorage.getItem('username');
     }
@@ -46,6 +51,10 @@ export class ProfileViewComponent implements OnInit {
     aux2PaU.user = this.user;
     aux2PaU.post = postEmiter;
     this.postsAndUsers.push(aux2PaU);
+  }
+
+  updateListPost(id: number){
+    this.postsAndUsers = this.postsAndUsers.filter( p => p.post.id !== id );
   }
 
   filterByTheme(theme: string){

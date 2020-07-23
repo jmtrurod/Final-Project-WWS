@@ -22,6 +22,9 @@ export class AllCitiesComponent implements OnInit {
   constructor(private http: HttpClient, private cookieService: CookieService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    if (!(this.cookieService.get('auth') && localStorage.getItem('username'))){
+      this.router.navigate(['/login'], { relativeTo: this.route });
+    }
     this.http.get<string[]>('http://localhost:8080/cities', this.httpOptions).subscribe(
       cities => this.cities = cities
     );

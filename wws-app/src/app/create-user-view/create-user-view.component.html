@@ -1,0 +1,45 @@
+<div class=background-login>
+    <form class='login-form' [formGroup]="myForm">
+      <div class="create-fields">
+        <div class="field">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Username</mat-label>
+            <input matInput placeholder="Enter a username..." formControlName="username">
+            <mat-error *ngIf="username.invalid">
+              Whatever
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Biography</mat-label>
+            <input matInput placeholder="Enter a bio..." formControlName="bio">
+            <mat-error *ngIf="username.invalid">
+              Whatever
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Enter a name..." formControlName="name">
+            <mat-error *ngIf="username.invalid">
+              Whatever
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Mail</mat-label>
+            <input matInput placeholder="Enter a mail..." formControlName="mail">
+            <mat-error *ngIf="username.invalid">
+              Whatever
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" placeholder="Enter password..." formControlName="password">
+            <mat-error *ngIf="password.invalid">
+              Whatever
+            </mat-error>
+          </mat-form-field>
+          <input type="file" (change)="onFileChanged($event)">
+          <button mat-button [disabled]="!isValid" (click)="submit()">LOGIN</button>
+        </div>
+      </div>
+    </form>
+  </div>

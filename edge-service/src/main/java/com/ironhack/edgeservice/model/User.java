@@ -4,13 +4,13 @@ public class User {
     private String username;
     private String name;
     private String bio;
-    private byte[] pic;
+    private String pic;
     private String mail;
     private int karma;
 
     public User(){}
 
-    public User(String username, String name, String bio, byte[] pic, String mail) {
+    public User(String username, String name, String bio, String pic, String mail) {
         this.username = username;
         this.name = name;
         this.bio = bio;
@@ -43,11 +43,11 @@ public class User {
         this.bio = bio;
     }
 
-    public byte[] getPic() {
+    public String getPic() {
         return pic;
     }
 
-    public void setPic(byte[] pic) {
+    public void setPic(String pic) {
         this.pic = pic;
     }
 

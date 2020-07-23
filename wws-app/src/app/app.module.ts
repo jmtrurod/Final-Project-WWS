@@ -21,6 +21,13 @@ import { LoginViewComponent } from './login-view/login-view.component';
 import { ProfileViewComponent } from './profile-view/profile-view.component';
 import { AllCitiesComponent } from './all-cities/all-cities.component';
 
+import { YamiCodeSocketComponent } from '../app/yami-code-socket/yami-code-socket.component';
+import { ToastrModule } from 'ngx-toastr';
+import { SocketService } from './services/socket.service';
+import { ErrorViewComponent } from './error-view/error-view.component';
+import { CreateUserViewComponent } from './create-user-view/create-user-view.component';
+import { CreateCityViewComponent } from './create-city-view/create-city-view.component';
+
 
 @NgModule({
   declarations: [
@@ -32,7 +39,11 @@ import { AllCitiesComponent } from './all-cities/all-cities.component';
     CreatePostFormComponent,
     LoginViewComponent,
     ProfileViewComponent,
-    AllCitiesComponent
+    AllCitiesComponent,
+    YamiCodeSocketComponent,
+    ErrorViewComponent,
+    CreateUserViewComponent,
+    CreateCityViewComponent
   ],
   imports: [
     BrowserModule,
@@ -42,11 +53,12 @@ import { AllCitiesComponent } from './all-cities/all-cities.component';
     FormsModule,
     BrowserAnimationsModule,
     MatButtonModule,
+    ToastrModule.forRoot({ timeOut: 3000 }),
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule
   ],
-  providers: [ CookieService ],
+  providers: [ CookieService, SocketService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,4 @@
-<app-navbar></app-navbar>
+<app-navbar [mainName]="cityName"></app-navbar>
 <div class="background-img">
     <div class="buttons">
         <button type="button" class="btn btn-light btn-circle btn-xl" (click)="filterByTheme('ALL')">ALL</button>
@@ -10,7 +10,7 @@
 
     <div *ngIf="postsAndUsers.length!==0">
         <div *ngFor="let pas of postsAndUsers">
-            <app-post-card [postAndUser]="pas" [service]="'city'"></app-post-card>
+            <app-post-card (postEmiter)="updateListPost($event)" [postAndUser]="pas" [service]="'city'"></app-post-card>
         </div>
     </div>
     <br>

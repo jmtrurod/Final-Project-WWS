@@ -31,7 +31,6 @@ export class LoginViewComponent implements OnInit {
       username: ['', [Validators.required]],
       password: ['', [Validators.required]]
     });
-
     this.myForm.valueChanges.subscribe(() => console.log);
   }
 

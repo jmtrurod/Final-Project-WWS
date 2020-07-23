@@ -4,7 +4,7 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Post } from '../Model/post.model';
 import { City } from '../Model/city.model';
 import { User } from '../Model/user.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({
@@ -25,10 +25,12 @@ export class CityViewComponent implements OnInit {
     }),
   };
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private cookieService: CookieService) {}
+  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute, private cookieService: CookieService) {}
 
   ngOnInit(): void {
-
+    if (!(this.cookieService.get('auth') && localStorage.getItem('username'))){
+      this.router.navigate(['/login'], { relativeTo: this.route });
+    }
     console.log(this.route.snapshot.queryParams);
     console.log(this.cityName);
     this.route.queryParams.subscribe( (params) => this.cityName = params.cityName );
@@ -59,6 +61,10 @@ export class CityViewComponent implements OnInit {
         });
       });
     });
+  }
+
+  updateListPost(id: number){
+    this.postsAndUsers = this.postsAndUsers.filter( p => p.post.id !== id );
   }
 
   allPosts(){

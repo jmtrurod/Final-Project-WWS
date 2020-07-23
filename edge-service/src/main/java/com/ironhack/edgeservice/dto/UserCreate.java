@@ -1,19 +1,15 @@
 package com.ironhack.edgeservice.dto;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-
 public class UserCreate {
     private String username;
     private String name;
     private String bio;
-    private byte[] pic;
+    private String pic;
     private String mail;
 
     public UserCreate(){}
 
-    public UserCreate(String username, String name, String bio, byte[] pic, String mail) {
+    public UserCreate(String username, String name, String bio, String pic, String mail){
         this.username = username;
         this.name = name;
         this.bio = bio;
@@ -45,11 +41,11 @@ public class UserCreate {
         this.bio = bio;
     }
 
-    public byte[] getPic() {
+    public String getPic() {
         return pic;
     }
 
-    public void setPic(byte[] pic) {
+    public void setPic(String pic) {
         this.pic = pic;
     }
 

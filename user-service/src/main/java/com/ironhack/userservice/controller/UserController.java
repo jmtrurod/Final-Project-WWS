@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @RestController
 public class UserController {
@@ -25,7 +26,14 @@ public class UserController {
     @GetMapping("/users/{username}")
     @ResponseStatus(HttpStatus.OK)
     public User findById(@PathVariable(name = "username") String username){
+        System.out.println("HEEEE");
         return userService.getUser(username);
+    }
+
+    @GetMapping("/users")
+    @ResponseStatus(HttpStatus.OK)
+    public List<User> findAll(){
+        return userService.findAll();
     }
 
     @PostMapping("/users/create")
@@ -42,7 +50,7 @@ public class UserController {
 
     @PatchMapping("/users/pic/{username}")
     @ResponseStatus(HttpStatus.OK)
-    public void updatePic(@PathVariable(name = "username") String username, @RequestBody @NotNull byte[] pic){
+    public void updatePic(@PathVariable(name = "username") String username, @RequestBody @NotNull String pic){
         userService.updatePic(username, pic);
     }
 

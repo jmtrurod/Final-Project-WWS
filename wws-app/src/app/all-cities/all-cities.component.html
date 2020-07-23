@@ -1,4 +1,4 @@
-<app-navbar></app-navbar>
+<app-navbar [mainName]="'All Cities'"></app-navbar>
 <ul>
     <li *ngFor="let city of cities">
         <button (click)="goToCity(city)">{{ city }}</button>
