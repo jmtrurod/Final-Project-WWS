@@ -5,6 +5,8 @@ import com.ironhack.userservice.dto.PersonCreate;
 import com.ironhack.userservice.exception.InputNotAllowed;
 import com.ironhack.userservice.model.Person;
 import com.ironhack.userservice.repository.PersonRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,18 +18,21 @@ public class PersonService {
     @Autowired
     private PersonRepository userRepository;
 
+    private static final Logger LOGGER = LogManager.getLogger(PersonService.class);
+
     public Person getUser(String username){
-        System.out.println(username);
+        LOGGER.info("Attempt to get user by username");
         Person userU = userRepository.findById(username).orElseThrow(() -> new InputNotAllowed(username + " is not an existing user"));
-        System.out.println(userU.getName());
         return userU;
     }
 
     public List<Person> findAll(){
+        LOGGER.info("Getting all users");
         return userRepository.findAll();
     }
 
     public Person createUser(PersonCreate personCreate){
+        LOGGER.info("Attempt to create user");
         Optional<Person> user = userRepository.findById(personCreate.getUsername());
         if (user.isPresent()){
             throw new InputNotAllowed(personCreate.getUsername() + " already exists as username");

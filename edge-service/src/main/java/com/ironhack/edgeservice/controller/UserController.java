@@ -3,6 +3,8 @@ package com.ironhack.edgeservice.controller;
 import com.ironhack.edgeservice.dto.UserCreate;
 import com.ironhack.edgeservice.model.User;
 import com.ironhack.edgeservice.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -11,24 +13,29 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/")
+@Api(tags = "User Edge Controller")
+@CrossOrigin(origins = "https://front-wws.firebaseapp.com")
 public class UserController {
     @Autowired
     private UserService userService;
 
     @GetMapping("/users/{username}")
+    @ApiOperation(value="Find user by id")
     @ResponseStatus(HttpStatus.OK)
     public User findById(@PathVariable(name = "username") String username, @RequestHeader(value = "Authorization") String authorizationHeader){
         return userService.getUser(username, authorizationHeader);
     }
 
     @GetMapping("/users")
+    @ApiOperation(value="Get all users")
     @ResponseStatus(HttpStatus.OK)
     public List<User> findAll(@RequestHeader(value = "Authorization") String authorizationHeader){
         return userService.findAll(authorizationHeader);
     };
 
     @PostMapping("/users/create")
+    @ApiOperation(value="Create user")
     @ResponseStatus(HttpStatus.CREATED)
     public User createUser(@RequestBody UserCreate userCreate){
         return userService.createUser(userCreate);
