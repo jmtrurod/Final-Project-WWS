@@ -4,6 +4,8 @@ package com.ironhack.userservice.controller;
 import com.ironhack.userservice.dto.PersonCreate;
 import com.ironhack.userservice.model.Person;
 import com.ironhack.userservice.service.PersonService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -12,11 +14,13 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@Api(tags = "User Controller")
 public class PersonController {
     @Autowired
     private PersonService personService;
 
     @GetMapping("/users/{username}")
+    @ApiOperation(value="Find user by id")
     @ResponseStatus(HttpStatus.OK)
     public Person findById(@PathVariable(name = "username") String username){
         System.out.println("HEEEE");
@@ -24,12 +28,14 @@ public class PersonController {
     }
 
     @GetMapping("/users")
+    @ApiOperation(value="Get all users")
     @ResponseStatus(HttpStatus.OK)
     public List<Person> findAll(){
         return personService.findAll();
     }
 
     @PostMapping("/users/create")
+    @ApiOperation(value="Create user")
     @ResponseStatus(HttpStatus.CREATED)
     public Person createUser(@RequestBody @Valid PersonCreate userCreate){
         return personService.createUser(userCreate);

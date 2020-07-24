@@ -8,6 +8,8 @@ import com.ironhack.edgeservice.enums.Theme;
 import com.ironhack.edgeservice.exception.UserMicroserviceFail;
 import com.ironhack.edgeservice.model.Post;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,8 @@ public class PostService {
     private PostMicroservice postMicroservice;
     @Autowired
     private SecurityMicroservice securityMicroservice;
+
+    private static final Logger LOGGER = LogManager.getLogger(PostService.class);
 
     @HystrixCommand(fallbackMethod = "PostMicroserviceFail")
     public Post createPost(PostCreate postCreate, String authorizationHeader, String username){
@@ -80,6 +84,7 @@ public class PostService {
     }
 
     public Post PostMicroserviceFail(PostCreate postCreate, String string, String string2){
+        LOGGER.info("Hystrix failure");
         throw new UserMicroserviceFail("Failure caught by Hystrix");
     }
 
@@ -88,18 +93,22 @@ public class PostService {
 //    }
 
     public void PostMicroserviceFail(Long id, String string, String string2){
+        LOGGER.info("Hystrix failure");
         throw new UserMicroserviceFail("Failure caught by Hystrix");
     }
 
     public void PostMicroserviceFail(Long id, String string){
+        LOGGER.info("Hystrix failure");
         throw new UserMicroserviceFail("Failure caught by Hystrix");
     }
 
     public List<Post> PostMicroserviceFail(String string, String string2){
+        LOGGER.info("Hystrix failure");
         throw new UserMicroserviceFail("Failure caught by Hystrix");
     }
 
     public List<Post> PostMicroserviceFail(String string, Theme theme, String string2){
+        LOGGER.info("Hystrix failure");
         throw new UserMicroserviceFail("Failure caught by Hystrix");
     }
 }

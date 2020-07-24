@@ -6,6 +6,8 @@ import com.ironhack.edgeservice.dto.UserCreate;
 import com.ironhack.edgeservice.exception.UserMicroserviceFail;
 import com.ironhack.edgeservice.model.User;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,20 +20,27 @@ public class UserService {
     @Autowired
     private SecurityMicroservice securityMicroservice;
 
+    private static final Logger LOGGER = LogManager.getLogger(UserService.class);
+
     @HystrixCommand(fallbackMethod = "UserMicroserviceFail2")
     public User getUser(String username, String authorizationHeader){
+        LOGGER.info("Attempt to get user by id");
         securityMicroservice.isAdminOrUser(authorizationHeader);
+        LOGGER.info("Allowed user");
         return userMicroservice.findById(username);
     }
 
     @HystrixCommand(fallbackMethod = "UserMicroserviceFail2")
     public List<User> findAll(String authorizationHeader){
+        LOGGER.info("Attempt to get all users");
         securityMicroservice.isAdminOrUser(authorizationHeader);
+        LOGGER.info("Allowed user");
         return userMicroservice.findAll();
     }
 
     @HystrixCommand(fallbackMethod = "UserMicroserviceFail")
     public User createUser(UserCreate userCreate) {
+        LOGGER.info("Attempt to create user");
         UserCreate newUserCreate = new UserCreate(
                 userCreate.getUsername(),
                 userCreate.getName(),
@@ -67,14 +76,17 @@ public class UserService {
 //    }
 
     public void UserMicroserviceFail(String string, String string2){
+        LOGGER.info("Hystrix failure");
         throw new UserMicroserviceFail("Failure caught by Hystrix");
     }
 
     public List<User> UserMicroserviceFail2(String authorizationHeader){
+        LOGGER.info("Hystrix failure");
         throw new UserMicroserviceFail("Failure caught by Hystrix");
     }
 
     public void UserMicroserviceFail(String username, String bits, String string2){
+        LOGGER.info("Hystrix failure");
         throw new UserMicroserviceFail("Failure caught by Hystrix");
     }
 
@@ -83,14 +95,12 @@ public class UserService {
 //    }
 
     public User UserMicroserviceFail(UserCreate userCreate){
+        LOGGER.info("Hystrix failure");
         throw new UserMicroserviceFail("Failure caught by Hystrix");
     }
 
     public User UserMicroserviceFail2(String string, String string2){
+        LOGGER.info("Hystrix failure");
         throw new UserMicroserviceFail("Failure caught by Hystrix");
-    }
-
-    public boolean UserMicroserviceFail(String string2){
-        return false;
     }
 }
