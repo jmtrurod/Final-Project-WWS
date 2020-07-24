@@ -31,12 +31,14 @@ export class CityViewComponent implements OnInit {
     if (!(this.cookieService.get('auth') && localStorage.getItem('username'))){
       this.router.navigate(['/login'], { relativeTo: this.route });
     }
+    console.log('a');
     console.log(this.route.snapshot.queryParams);
+    console.log('a');
     console.log(this.cityName);
     this.route.queryParams.subscribe( (params) => this.cityName = params.cityName );
     console.log(this.cityName);
 
-    this.http.get<City>('http://localhost:8080/cities/' + this.cityName, this.httpOptions).subscribe( city => {
+    this.http.get<City>('https://wws-edge-service.herokuapp.com/cities/' + this.cityName, this.httpOptions).subscribe( city => {
       this.city = city;
       console.log(this.city);
       this.allPosts();
@@ -49,12 +51,12 @@ export class CityViewComponent implements OnInit {
       return;
     }
     this.postsAndUsers = [];
-    this.http.get<Post[]>('http://localhost:8080/posts/city/theme?cityId=' + this.city.id + '&theme=' + theme, this.httpOptions)
+    this.http.get<Post[]>('https://wws-edge-service.herokuapp.com/posts/city/theme?cityId=' + this.city.id + '&theme=' + theme, this.httpOptions)
     .subscribe(posts => {
       this.posts = posts;
       this.posts.forEach(p => {
         let auxPaU = new PostAndUser();
-        this.http.get<User>('http://localhost:8080/users/' + p.username, this.httpOptions).subscribe( u => {
+        this.http.get<User>('https://wws-edge-service.herokuapp.com/users/' + p.username, this.httpOptions).subscribe( u => {
           auxPaU.user = u;
           auxPaU.post = p;
           this.postsAndUsers.push(auxPaU);
@@ -69,12 +71,12 @@ export class CityViewComponent implements OnInit {
 
   allPosts(){
     this.postsAndUsers = [];
-    this.http.get<Post[]>('http://localhost:8080/posts/city/' + this.cityName, this.httpOptions).subscribe(posts => {
+    this.http.get<Post[]>('https://wws-edge-service.herokuapp.com/posts/city/' + this.cityName, this.httpOptions).subscribe(posts => {
         console.log(posts);
         this.posts = posts;
         this.posts.forEach(p => {
           let auxPaU = new PostAndUser();
-          this.http.get<User>('http://localhost:8080/users/' + p.username, this.httpOptions).subscribe( u => {
+          this.http.get<User>('https://wws-edge-service.herokuapp.com/users/' + p.username, this.httpOptions).subscribe( u => {
           auxPaU.user = u;
           auxPaU.post = p;
           this.postsAndUsers.push(auxPaU);

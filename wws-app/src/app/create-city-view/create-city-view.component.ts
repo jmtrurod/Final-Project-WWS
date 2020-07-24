@@ -41,7 +41,7 @@ export class CreateCityViewComponent implements OnInit {
     this.myForm = this.fb.group({
       city: ['', [Validators.required]],
       country: ['', [Validators.required]],
-      description: ['', [Validators.required]]
+      description: ['', [Validators.required, Validators.minLength(50), Validators.maxLength(350)]]
     });
     this.myForm.valueChanges.subscribe(() => console.log);
   }
@@ -56,7 +56,7 @@ export class CreateCityViewComponent implements OnInit {
     cityDto.country = this.country.value;
     cityDto.description = this.description.value;
     cityDto.pic = this.imgURL;
-    this.http.post<City>('http://localhost:8080/cities', cityDto, this.httpOptions).subscribe( () => {
+    this.http.post<City>('https://wws-edge-service.herokuapp.com/cities', cityDto, this.httpOptions).subscribe( () => {
       this.router.navigate(['/home'], { relativeTo: this.route });
     });
   }

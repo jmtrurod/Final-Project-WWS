@@ -1,0 +1,8 @@
+.flexer{
+    display: flex;
+    width: 60%;
+}
+
+.buttons{
+    margin: 2rem;
+}

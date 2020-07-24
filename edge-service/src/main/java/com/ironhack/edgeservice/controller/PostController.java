@@ -1,6 +1,6 @@
 package com.ironhack.edgeservice.controller;
 
-import com.ironhack.edgeservice.dto.ContentDto;
+//  import com.ironhack.edgeservice.dto.ContentDto;
 import com.ironhack.edgeservice.dto.PostCreate;
 import com.ironhack.edgeservice.enums.Theme;
 import com.ironhack.edgeservice.model.Post;
@@ -17,12 +17,6 @@ public class PostController {
     @Autowired
     private PostService postService;
 
-//    @GetMapping("/posts/isup")
-//    @ResponseStatus(HttpStatus.OK)
-//    public boolean isUp(@RequestHeader(value = "Authorization") String authorizationHeader){
-//        return postService.isUp();
-//    }
-
     @PostMapping("/posts/create")
     @ResponseStatus(HttpStatus.CREATED)
     public Post createPost(@RequestBody PostCreate postCreate,
@@ -31,13 +25,13 @@ public class PostController {
         return postService.createPost(postCreate, authorizationHeader, username);
     }
 
-    @PatchMapping("/posts/content/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public void updateBio(@PathVariable(name = "id") Long id, @RequestBody ContentDto contentDto,
-                          @RequestHeader(value = "Authorization") String authorizationHeader,
-                          @RequestParam(name = "username") String username){
-        postService.updateContent(id, contentDto, authorizationHeader, username);
-    }
+//    @PatchMapping("/posts/content/{id}")
+//    @ResponseStatus(HttpStatus.OK)
+//    public void updateContent(@PathVariable(name = "id") Long id, @RequestBody ContentDto contentDto,
+//                          @RequestHeader(value = "Authorization") String authorizationHeader,
+//                          @RequestParam(name = "username") String username){
+//        postService.updateContent(id, contentDto, authorizationHeader, username);
+//    }
 
     @PutMapping("/posts/increment/{id}")
     @ResponseStatus(HttpStatus.OK)

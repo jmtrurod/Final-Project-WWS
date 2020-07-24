@@ -7,25 +7,25 @@
             <mat-label>City</mat-label>
             <input matInput placeholder="Enter a username..." formControlName="city">
             <mat-error *ngIf="city.invalid">
-              Whatever
+              Enter a city
             </mat-error>
           </mat-form-field>
           <mat-form-field class="example-full-width" appearance="outline">
             <mat-label>Country</mat-label>
             <input matInput placeholder="Enter a bio..." formControlName="country">
             <mat-error *ngIf="country.invalid">
-              Whatever
+              Enter a country
             </mat-error>
           </mat-form-field>
           <mat-form-field class="example-full-width" appearance="outline">
             <mat-label>Description</mat-label>
             <input matInput placeholder="Enter a name..." formControlName="description">
             <mat-error *ngIf="description.invalid">
-              Whatever
+              Min 50 characters. Max 350 characters
             </mat-error>
           </mat-form-field>
           <input type="file" (change)="onFileChanged($event)">
-          <button mat-button [disabled]="!isValid" (click)="submit()">LOGIN</button>
+          <button mat-button [disabled]="!(myForm.valid && imgURL)" (click)="submit()">CREATE</button>
         </div>
       </div>
     </form>

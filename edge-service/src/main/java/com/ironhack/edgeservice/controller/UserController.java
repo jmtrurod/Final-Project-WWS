@@ -1,5 +1,5 @@
 package com.ironhack.edgeservice.controller;
-import com.ironhack.edgeservice.dto.BioDto;
+//  import com.ironhack.edgeservice.dto.BioDto;
 import com.ironhack.edgeservice.dto.UserCreate;
 import com.ironhack.edgeservice.model.User;
 import com.ironhack.edgeservice.service.UserService;
@@ -15,12 +15,6 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
-
-//    @GetMapping("/users/isup")
-//    @ResponseStatus(HttpStatus.OK)
-//    public boolean isUp(){
-//        return userService.isUp();
-//    }
 
     @GetMapping("/users/{username}")
     @ResponseStatus(HttpStatus.OK)
@@ -40,28 +34,28 @@ public class UserController {
         return userService.createUser(userCreate);
     }
 
-    @PatchMapping("/users/bio/{username}")
-    @ResponseStatus(HttpStatus.OK)
-    public void updateBio(@PathVariable(name = "username") String username, @RequestBody BioDto bioDto, @RequestHeader(value = "Authorization") String authorizationHeader){
-        userService.updateBio(username, bioDto, authorizationHeader);
-    }
+//    @PatchMapping("/users/bio/{username}")
+//    @ResponseStatus(HttpStatus.OK)
+//    public void updateBio(@PathVariable(name = "username") String username, @RequestBody BioDto bioDto, @RequestHeader(value = "Authorization") String authorizationHeader){
+//        userService.updateBio(username, bioDto, authorizationHeader);
+//    }
+//
+//    @PatchMapping("/users/pic/{username}")
+//    @ResponseStatus(HttpStatus.OK)
+//    public void updatePic(@PathVariable(name = "username") String username, @RequestBody String pic, @RequestHeader(value = "Authorization") String authorizationHeader){
+//        userService.updatePic(username, pic, authorizationHeader);
+//    }
 
-    @PatchMapping("/users/pic/{username}")
-    @ResponseStatus(HttpStatus.OK)
-    public void updatePic(@PathVariable(name = "username") String username, @RequestBody String pic, @RequestHeader(value = "Authorization") String authorizationHeader){
-        userService.updatePic(username, pic, authorizationHeader);
-    }
-
-    @PutMapping("/users/increment/{username}")
-    @ResponseStatus(HttpStatus.OK)
-    public void incrementKarma(@PathVariable(name = "username") String username, @RequestHeader(value = "Authorization") String authorizationHeader){
-        userService.incrementKarma(username, authorizationHeader);
-    }
-
-    @PutMapping("/users/decrement/{username}")
-    @ResponseStatus(HttpStatus.OK)
-    public void decrementKarma(@PathVariable(name = "username") String username, @RequestHeader(value = "Authorization") String authorizationHeader){
-        userService.decrementKarma(username, authorizationHeader);
-    }
+//    @PutMapping("/users/increment/{username}")
+//    @ResponseStatus(HttpStatus.OK)
+//    public void incrementKarma(@PathVariable(name = "username") String username, @RequestHeader(value = "Authorization") String authorizationHeader){
+//        userService.incrementKarma(username, authorizationHeader);
+//    }
+//
+//    @PutMapping("/users/decrement/{username}")
+//    @ResponseStatus(HttpStatus.OK)
+//    public void decrementKarma(@PathVariable(name = "username") String username, @RequestHeader(value = "Authorization") String authorizationHeader){
+//        userService.decrementKarma(username, authorizationHeader);
+//    }
 
 }

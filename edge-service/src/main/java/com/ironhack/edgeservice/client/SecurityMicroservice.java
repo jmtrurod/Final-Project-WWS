@@ -5,7 +5,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-@FeignClient(name = "security-service")
+@FeignClient(name = "security-service", url = "https://wws-security-service.herokuapp.com/")
 public interface SecurityMicroservice {
 
     @GetMapping("/users/is-admin")

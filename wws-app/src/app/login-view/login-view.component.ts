@@ -11,7 +11,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class LoginViewComponent implements OnInit {
   myForm: FormGroup;
-  isValid = true;
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -31,7 +30,6 @@ export class LoginViewComponent implements OnInit {
       username: ['', [Validators.required]],
       password: ['', [Validators.required]]
     });
-    this.myForm.valueChanges.subscribe(() => console.log);
   }
 
   submit() {
@@ -54,7 +52,7 @@ export class LoginViewComponent implements OnInit {
     };
     this.http
       .get<boolean>(
-        'http://localhost:8080/users/is-admin-user',
+        'https://wws-edge-service.herokuapp.com/users/is-admin-user',
         httpOptions
       )
       .subscribe((resp) => {
@@ -67,6 +65,10 @@ export class LoginViewComponent implements OnInit {
           this.myForm.controls.password.setErrors({ incorrect: true });
         }
       });
+  }
+  
+  goToNewUser(){
+    this.router.navigate(['/create-user'], { relativeTo: this.route });
   }
 
   get username() {

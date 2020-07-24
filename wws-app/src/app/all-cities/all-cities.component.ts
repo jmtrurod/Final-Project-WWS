@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
+import { City } from '../Model/city.model';
 
 @Component({
   selector: 'app-all-cities',
@@ -10,7 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class AllCitiesComponent implements OnInit {
 
-  cities: string[];
+  listCities: City[];
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -25,8 +26,9 @@ export class AllCitiesComponent implements OnInit {
     if (!(this.cookieService.get('auth') && localStorage.getItem('username'))){
       this.router.navigate(['/login'], { relativeTo: this.route });
     }
-    this.http.get<string[]>('http://localhost:8080/cities', this.httpOptions).subscribe(
-      cities => this.cities = cities
+
+    this.http.get<City[]>('https://wws-edge-service.herokuapp.com/cities-obj', this.httpOptions).subscribe(
+      cities => this.listCities = cities
     );
   }
 

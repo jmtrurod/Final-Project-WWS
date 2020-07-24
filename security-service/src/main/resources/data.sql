@@ -1,4 +1,5 @@
-INSERT INTO user(id, username, password, rol) VALUES
-(1, "admin", "$2a$10$08G9MoHmIElHEp33nrZxXehx1eJoDT5I9LMkGkTonZm3ca340s0Fe", "ADMIN"),
-(2, "salesperson", "$2a$10$9JnhLMRVETzbbdo0VRCObuEkurk9dBqI1B09xjOmYQrgVuiTwvl4y", "SALES_PERSON"),
-(3, "user", "$2a$10$R4dULbfDzfISbmsj0HxlwOP5r7sFDTyrQ5sOpPKQgI2HKec0Blroq", "USER");
+INSERT INTO `user` (`id`,`password`,`rol`,`username`) VALUES (1,'$2a$10$08G9MoHmIElHEp33nrZxXehx1eJoDT5I9LMkGkTonZm3ca340s0Fe','ADMIN','admin');
+INSERT INTO `user` (`id`,`password`,`rol`,`username`) VALUES (2,'$2a$10$RfZPO2jO5dE0XggI7FWQl.Rsk7UqNFzCpf5XFe4p.FBDpZwzzDP/W','USER','chandler');
+INSERT INTO `user` (`id`,`password`,`rol`,`username`) VALUES (3,'$2a$10$PajJgsAhAkFZIVqPm/vg5Ok/31Oq6BDBWr6ECAkmVqfERdncvPUzy','USER','cameron');
+INSERT INTO `user` (`id`,`password`,`rol`,`username`) VALUES (4,'$2a$10$7b6hysDJ5.QZFiLW7I/NruxrUA5D.SA73eQZWr7c4FEDV8KiljLUe','USER','joeytriv');
+INSERT INTO `user` (`id`,`password`,`rol`,`username`) VALUES (5,'$2a$10$QZ/5MOWJL1uxhY/zMRCY0eI3OqZYp1XIyXDaZTmexwRQgPNY5/hyq','USER','phoebebuff');

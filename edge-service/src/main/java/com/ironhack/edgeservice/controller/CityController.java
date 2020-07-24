@@ -1,7 +1,7 @@
 package com.ironhack.edgeservice.controller;
 
 import com.ironhack.edgeservice.dto.CityCreate;
-import com.ironhack.edgeservice.dto.DescriptionDto;
+//  import com.ironhack.edgeservice.dto.DescriptionDto;
 import com.ironhack.edgeservice.model.City;
 import com.ironhack.edgeservice.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +15,6 @@ import java.util.List;
 public class CityController {
     @Autowired
     private CityService cityService;
-//
-//    @GetMapping("/cities/isup")
-//    @ResponseStatus(HttpStatus.OK)
-//    public boolean isUp(@RequestHeader(value = "Authorization") String authorizationHeader){
-//        return cityService.isUp();
-//    }
 
     @GetMapping("/cities/{id}")
     @ResponseStatus(HttpStatus.OK)
@@ -34,21 +28,27 @@ public class CityController {
         return cityService.createCity(cityCreate, authorizationHeader);
     }
 
-    @PatchMapping("/cities/content/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public void updateDescription(@PathVariable(name = "id") String id, @RequestBody DescriptionDto descriptionDto, @RequestHeader(value = "Authorization") String authorizationHeader){
-        cityService.updateDescription(id, descriptionDto, authorizationHeader);
-    }
-
-    @PatchMapping("/cities/pic/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public void updatePic(@PathVariable(name = "id") String id, @RequestBody String pic, @RequestHeader(value = "Authorization") String authorizationHeader){
-        cityService.updatePic(id, pic, authorizationHeader);
-    }
+//    @PatchMapping("/cities/content/{id}")
+//    @ResponseStatus(HttpStatus.OK)
+//    public void updateDescription(@PathVariable(name = "id") String id, @RequestBody DescriptionDto descriptionDto, @RequestHeader(value = "Authorization") String authorizationHeader){
+//        cityService.updateDescription(id, descriptionDto, authorizationHeader);
+//    }
+//
+//    @PatchMapping("/cities/pic/{id}")
+//    @ResponseStatus(HttpStatus.OK)
+//    public void updatePic(@PathVariable(name = "id") String id, @RequestBody String pic, @RequestHeader(value = "Authorization") String authorizationHeader){
+//        cityService.updatePic(id, pic, authorizationHeader);
+//    }
 
     @GetMapping("/cities")
     @ResponseStatus(HttpStatus.OK)
     public List<String> getAllCities(@RequestHeader(value = "Authorization") String authorizationHeader){
         return cityService.getAllCities(authorizationHeader);
+    }
+
+    @GetMapping("/cities-obj")
+    @ResponseStatus(HttpStatus.OK)
+    public List<City> getAllCitiesObj(@RequestHeader(value = "Authorization") String authorizationHeader){
+        return cityService.getAllCitiesObj(authorizationHeader);
     }
 }
