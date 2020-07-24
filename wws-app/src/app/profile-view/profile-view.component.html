@@ -1,5 +1,4 @@
 <app-navbar [mainName]="username"></app-navbar>
-<button (click)="toCity()">TO CITY</button>
 <div class="background-profile">
     <app-profile-header [user]="user" *ngIf="user!==undefined"></app-profile-header>
     <app-create-post-form (postEmiter)="updateList($event)" [username]="user.username" *ngIf="user!==undefined && user.username==profileUser"></app-create-post-form>

@@ -23,13 +23,13 @@ img.logo {
     margin-left: 2%;
 }
 
-.background-img {
+/* .background-img {
     background-image: url("assets/img/londres.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
     background-size: cover;
-}
+} */
 
 .btn-circle.btn-xl { 
     width: 100px; 

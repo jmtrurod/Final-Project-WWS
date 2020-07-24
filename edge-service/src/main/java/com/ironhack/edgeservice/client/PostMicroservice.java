@@ -1,6 +1,6 @@
 package com.ironhack.edgeservice.client;
 
-import com.ironhack.edgeservice.dto.ContentDto;
+//  import com.ironhack.edgeservice.dto.ContentDto;
 import com.ironhack.edgeservice.dto.PostCreate;
 import com.ironhack.edgeservice.enums.Theme;
 import com.ironhack.edgeservice.model.Post;
@@ -10,19 +10,16 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(name = "post-service")
+@FeignClient(name = "post-service", url = "https://wws-post-service.herokuapp.com/")
 public interface PostMicroservice {
-    @GetMapping("/posts/isup")
-    @ResponseStatus(HttpStatus.OK)
-    public boolean isUp();
 
     @PostMapping("/posts/create")
     @ResponseStatus(HttpStatus.CREATED)
     public Post createPost(@RequestBody PostCreate postCreate);
 
-    @PatchMapping("/posts/content/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public void updateContent(@PathVariable(name = "id") Long id, @RequestBody ContentDto contentDto);
+//    @PatchMapping("/posts/content/{id}")
+//    @ResponseStatus(HttpStatus.OK)
+//    public void updateContent(@PathVariable(name = "id") Long id, @RequestBody ContentDto contentDto);
 
     @PutMapping("/posts/increment/{id}")
     @ResponseStatus(HttpStatus.OK)

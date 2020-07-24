@@ -48,7 +48,7 @@ export class YamiCodeSocketComponent implements OnInit {
     if (!(this.cookieService.get('auth') && localStorage.getItem('username'))){
       this.router.navigate(['/login'], { relativeTo: this.route });
     }
-    this.http.get<User[]>('http://localhost:8080/users', this.httpOptions)
+    this.http.get<User[]>('https://wws-edge-service.herokuapp.com/users', this.httpOptions)
     .subscribe(users => {
       users.forEach(u => {
         if (u.username !== localStorage.getItem('username')){
@@ -67,7 +67,7 @@ export class YamiCodeSocketComponent implements OnInit {
   }
 
   sendMessageUsingSocket() {
-    this.http.get<boolean>('http://localhost:8080/users/is-allowed-user?username=' + localStorage.getItem('username'), this.httpOptions)
+    this.http.get<boolean>('https://wws-edge-service.herokuapp.com/users/is-allowed-user?username=' + localStorage.getItem('username'), this.httpOptions)
     .subscribe( b => this.canSend = b );
 
     if (this.form.valid && this.canSend) {
@@ -113,7 +113,7 @@ export class YamiCodeSocketComponent implements OnInit {
       let mau = new MessageAndUser();
       mau.message = messageResult;
       mau.toUserId = messageResult.toId;
-      this.http.get<User>('http://localhost:8080/users/' + messageResult.fromId, this.httpOptions)
+      this.http.get<User>('https://wws-edge-service.herokuapp.com/users/' + messageResult.fromId, this.httpOptions)
       .subscribe( user => {
         user.convertedPic = 'data:image/jpeg;base64,' + user.pic;
         mau.user = user;

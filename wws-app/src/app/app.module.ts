@@ -17,6 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
 import { LoginViewComponent } from './login-view/login-view.component';
 import { ProfileViewComponent } from './profile-view/profile-view.component';
 import { AllCitiesComponent } from './all-cities/all-cities.component';
@@ -27,6 +28,7 @@ import { SocketService } from './services/socket.service';
 import { ErrorViewComponent } from './error-view/error-view.component';
 import { CreateUserViewComponent } from './create-user-view/create-user-view.component';
 import { CreateCityViewComponent } from './create-city-view/create-city-view.component';
+import { DisplaySingleCityComponent } from './display-single-city/display-single-city.component';
 
 
 @NgModule({
@@ -43,7 +45,8 @@ import { CreateCityViewComponent } from './create-city-view/create-city-view.com
     YamiCodeSocketComponent,
     ErrorViewComponent,
     CreateUserViewComponent,
-    CreateCityViewComponent
+    CreateCityViewComponent,
+    DisplaySingleCityComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +59,8 @@ import { CreateCityViewComponent } from './create-city-view/create-city-view.com
     ToastrModule.forRoot({ timeOut: 3000 }),
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCardModule
   ],
   providers: [ CookieService, SocketService ],
   bootstrap: [AppComponent]

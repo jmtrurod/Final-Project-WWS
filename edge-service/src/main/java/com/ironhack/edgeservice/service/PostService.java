@@ -2,7 +2,7 @@ package com.ironhack.edgeservice.service;
 
 import com.ironhack.edgeservice.client.PostMicroservice;
 import com.ironhack.edgeservice.client.SecurityMicroservice;
-import com.ironhack.edgeservice.dto.ContentDto;
+//  import com.ironhack.edgeservice.dto.ContentDto;
 import com.ironhack.edgeservice.dto.PostCreate;
 import com.ironhack.edgeservice.enums.Theme;
 import com.ironhack.edgeservice.exception.UserMicroserviceFail;
@@ -20,22 +20,17 @@ public class PostService {
     @Autowired
     private SecurityMicroservice securityMicroservice;
 
-//    @HystrixCommand(fallbackMethod = "PostMicroserviceFail")
-//    public boolean isUp(){
-//        return postMicroservice.isUp();
-//    }
-
     @HystrixCommand(fallbackMethod = "PostMicroserviceFail")
     public Post createPost(PostCreate postCreate, String authorizationHeader, String username){
         securityMicroservice.isAllowedUser(authorizationHeader, username);
         return postMicroservice.createPost(postCreate);
     }
 
-    @HystrixCommand(fallbackMethod = "PostMicroserviceFail")
-    public void updateContent(Long id, ContentDto contentDto, String authorizationHeader, String username){
-        securityMicroservice.isAllowedUser(authorizationHeader, username);
-        postMicroservice.updateContent(id, contentDto);
-    }
+//    @HystrixCommand(fallbackMethod = "PostMicroserviceFail")
+//    public void updateContent(Long id, ContentDto contentDto, String authorizationHeader, String username){
+//        securityMicroservice.isAllowedUser(authorizationHeader, username);
+//        postMicroservice.updateContent(id, contentDto);
+//    }
 
     @HystrixCommand(fallbackMethod = "PostMicroserviceFail")
     public void incrementKarma(Long id, String username, String authorizationHeader){
@@ -84,17 +79,13 @@ public class PostService {
         return postMicroservice.postsByPersonAndTheme(username, theme);
     }
 
-    public boolean PostMicroserviceFail(String string2){
-        return false;
-    }
-
     public Post PostMicroserviceFail(PostCreate postCreate, String string, String string2){
         throw new UserMicroserviceFail("Failure caught by Hystrix");
     }
 
-    public void PostMicroserviceFail(Long id, ContentDto contentDto,String string, String string2){
-        throw new UserMicroserviceFail("Failure caught by Hystrix");
-    }
+//    public void PostMicroserviceFail(Long id, ContentDto contentDto,String string, String string2){
+//        throw new UserMicroserviceFail("Failure caught by Hystrix");
+//    }
 
     public void PostMicroserviceFail(Long id, String string, String string2){
         throw new UserMicroserviceFail("Failure caught by Hystrix");

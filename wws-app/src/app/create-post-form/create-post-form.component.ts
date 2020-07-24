@@ -41,7 +41,7 @@ export class CreatePostFormComponent implements OnInit {
      });
     this.myForm.valueChanges.subscribe(() => console.log );
 
-    this.http.get<string[]>('http://localhost:8080/cities', this.httpOptions).subscribe(
+    this.http.get<string[]>('https://wws-edge-service.herokuapp.com/cities', this.httpOptions).subscribe(
       cities => this.cities = cities
     );
   }
@@ -69,7 +69,7 @@ export class CreatePostFormComponent implements OnInit {
     this.postCreateDto.url = this.url.value;
     this.postCreateDto.username = this.username;
 
-    this.http.post<Post>('http://localhost:8080/posts/create?username=' + this.username, this.postCreateDto, this.httpOptions)
+    this.http.post<Post>('https://wws-edge-service.herokuapp.com/posts/create?username=' + this.username, this.postCreateDto, this.httpOptions)
     .subscribe(post => this.postEmiter.emit(post));
     this.isForm = false;
     this.myForm.reset();

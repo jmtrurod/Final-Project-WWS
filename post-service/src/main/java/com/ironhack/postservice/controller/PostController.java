@@ -1,6 +1,6 @@
 package com.ironhack.postservice.controller;
 
-import com.ironhack.postservice.dto.ContentDto;
+//   import com.ironhack.postservice.dto.ContentDto;
 import com.ironhack.postservice.dto.PostCreate;
 import com.ironhack.postservice.enums.Theme;
 import com.ironhack.postservice.model.Post;
@@ -18,23 +18,17 @@ public class PostController {
     @Autowired
     private PostService postService;
 
-    @GetMapping("/posts/isup")
-    @ResponseStatus(HttpStatus.OK)
-    public boolean isUp(){
-        return true;
-    }
-
     @PostMapping("/posts/create")
     @ResponseStatus(HttpStatus.CREATED)
     public Post createPost(@RequestBody @Valid PostCreate postCreate){
         return postService.createPost(postCreate);
     }
 
-    @PatchMapping("/posts/content/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public void updateContent(@PathVariable(name = "id") Long id, @RequestBody @Valid ContentDto contentDto){
-        postService.updateContent(id, contentDto);
-    }
+//    @PatchMapping("/posts/content/{id}")
+//    @ResponseStatus(HttpStatus.OK)
+//    public void updateContent(@PathVariable(name = "id") Long id, @RequestBody @Valid ContentDto contentDto){
+//        postService.updateContent(id, contentDto);
+//    }
 
     @PutMapping("/posts/increment/{id}")
     @ResponseStatus(HttpStatus.OK)

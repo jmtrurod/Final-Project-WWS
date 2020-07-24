@@ -1,6 +1,6 @@
 package com.ironhack.postservice.service;
 
-import com.ironhack.postservice.dto.ContentDto;
+//  import com.ironhack.postservice.dto.ContentDto;
 import com.ironhack.postservice.dto.PostCreate;
 import com.ironhack.postservice.enums.Theme;
 import com.ironhack.postservice.exception.InputNotAllowed;
@@ -20,11 +20,11 @@ public class PostService {
         return postRepository.save(new Post(postCreate.getUsername(), postCreate.getTheme(), postCreate.getCountry(), postCreate.getCity(), postCreate.getUrl(), postCreate.getContent(), postCreate.getTitle()));
     }
 
-    public void updateContent(Long id, ContentDto contentDto){
-        Post post = postRepository.findById(id).orElseThrow(() -> new InputNotAllowed("There's no post with id " + id));
-        post.setContent(contentDto.getContent());
-        postRepository.save(post);
-    }
+//    public void updateContent(Long id, ContentDto contentDto){
+//        Post post = postRepository.findById(id).orElseThrow(() -> new InputNotAllowed("There's no post with id " + id));
+//        post.setContent(contentDto.getContent());
+//        postRepository.save(post);
+//    }
 
     public void incrementKarma(Long id, String username){
         Post post = postRepository.findById(id).orElseThrow(()-> new InputNotAllowed("" + id + " doesn't exist"));

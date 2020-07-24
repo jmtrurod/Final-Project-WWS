@@ -6,17 +6,18 @@
           <mat-label>Username</mat-label>
           <input matInput placeholder="Enter a username..." formControlName="username">
           <mat-error *ngIf="username.invalid">
-            Whatever
+            Enter an username
           </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width" appearance="outline">
           <mat-label>Password</mat-label>
           <input matInput type="password" placeholder="Enter password..." formControlName="password">
           <mat-error *ngIf="password.invalid">
-            Whatever
+            Enter a password
           </mat-error>
         </mat-form-field>
-        <button mat-button [disabled]="!isValid" (click)="submit()">LOGIN</button>
+        <button mat-button [disabled]="!myForm.valid" (click)="submit()"> LOGIN </button>
+        <button mat-button (click)="goToNewUser()">REGISTER</button>
       </div>
     </div>
   </form>

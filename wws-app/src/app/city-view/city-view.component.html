@@ -1,5 +1,5 @@
 <app-navbar [mainName]="cityName"></app-navbar>
-<div class="background-img">
+<div class="background-img" style="background-image: url({{city.pic}});">
     <div class="buttons">
         <button type="button" class="btn btn-light btn-circle btn-xl" (click)="filterByTheme('ALL')">ALL</button>
         <button type="button" class="btn btn-primary btn-circle btn-xl" (click)="filterByTheme('FOOD')">FOOD</button>

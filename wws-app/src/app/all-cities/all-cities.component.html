@@ -1,6 +1,4 @@
 <app-navbar [mainName]="'All Cities'"></app-navbar>
-<ul>
-    <li *ngFor="let city of cities">
-        <button (click)="goToCity(city)">{{ city }}</button>
-    </li>
-</ul>
+<div class="flexer">
+    <button style="background-image: url({{city.pic}}); background-size: cover;" class="buttons" (click)="goToCity(city.id)" *ngFor="let city of listCities"><app-display-single-city [city]="city"></app-display-single-city></button>
+</div>

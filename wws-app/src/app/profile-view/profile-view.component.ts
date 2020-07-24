@@ -40,7 +40,7 @@ export class ProfileViewComponent implements OnInit {
     if (!this.username){
       this.username = localStorage.getItem('username');
     }
-    this.http.get<User>('http://localhost:8080/users/' + this.username, this.httpOptions).subscribe( user => {
+    this.http.get<User>('https://wws-edge-service.herokuapp.com/users/' + this.username, this.httpOptions).subscribe( user => {
       this.user = user;
       this.allPosts();
     });
@@ -63,7 +63,7 @@ export class ProfileViewComponent implements OnInit {
       return;
     }
     this.postsAndUsers = [];
-    this.http.get<Post[]>('http://localhost:8080/posts/person/theme?username=' + this.user.username + '&theme=' + theme,
+    this.http.get<Post[]>('https://wws-edge-service.herokuapp.com/posts/person/theme?username=' + this.user.username + '&theme=' + theme,
      this.httpOptions).subscribe(posts => {
         this.posts = posts;
         this.posts.forEach(p => {
@@ -77,7 +77,7 @@ export class ProfileViewComponent implements OnInit {
 
   allPosts(){
     this.postsAndUsers = [];
-    this.http.get<Post[]>('http://localhost:8080/posts/person/' + this.username, this.httpOptions).subscribe(posts => {
+    this.http.get<Post[]>('https://wws-edge-service.herokuapp.com/posts/person/' + this.username, this.httpOptions).subscribe(posts => {
       this.posts = posts;
       this.posts.forEach(p => {
         let auxPaU = new PostAndUser();
@@ -86,9 +86,5 @@ export class ProfileViewComponent implements OnInit {
         this.postsAndUsers.push(auxPaU);
       });
     });
-  }
-
-  toCity(){
-    this.router.navigate(['/cities'], {queryParams: {cityName: 'Madrid-España'}, relativeTo: this.route });
   }
 }

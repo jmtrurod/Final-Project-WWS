@@ -39,13 +39,13 @@ export class CreateUserViewComponent implements OnInit {
 
   ngOnInit() {
     this.myForm = this.fb.group({
-      username: ['', [Validators.required]],
-      name: ['', [Validators.required]],
-      bio: ['', [Validators.required]],
-      mail: ['', [Validators.required]],
-      password: ['', [Validators.required]]
+      username: ['', [Validators.required, Validators.maxLength(15), Validators.minLength(6)]],
+      name: ['', [Validators.required, Validators.maxLength(60), Validators.minLength(12)]],
+      bio: ['', [Validators.required, Validators.maxLength(140), Validators.minLength(5)]],
+      mail: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(30)]]
     });
-    this.myForm.valueChanges.subscribe(() => console.log);
+    this.myForm.valueChanges.subscribe(() => console.log(this.imgURL));
   }
 
   submit() {
@@ -55,7 +55,7 @@ export class CreateUserViewComponent implements OnInit {
     user.password = this.password.value;
     let firstAttempt = false;
     console.log('a');
-    this.http.post<SecurityUser>('http://localhost:8080/users-create', user).subscribe( () => {
+    this.http.post<SecurityUser>('https://wws-edge-service.herokuapp.com/users-create', user).subscribe( () => {
       console.log('b');
       if (!firstAttempt) {
         firstAttempt = true;
@@ -66,10 +66,14 @@ export class CreateUserViewComponent implements OnInit {
         newUser.name = this.name.value;
         newUser.pic = this.imgURL;
         console.log('c');
-        this.http.post<User>('http://localhost:8080/users/create', newUser).subscribe(o => console.log(o));
+        this.http.post<User>('https://wws-edge-service.herokuapp.com/users/create', newUser).subscribe(o => console.log(o));
         this.router.navigate(['/login'], { relativeTo: this.route });
       }
     });
+  }
+
+  goToLogin(){
+    this.router.navigate(['/login'], { relativeTo: this.route });
   }
 
   get username() {

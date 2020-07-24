@@ -52,7 +52,7 @@ export class PostCardComponent implements OnInit {
     this.cardClass = 'card ' + this.postAndUser.post.theme.toLocaleLowerCase() + '-card';
     this.convertedImage = 'data:image/jpeg;base64,' + this.postAndUser.user.pic;
 
-    this.http.get<boolean>('http://localhost:8080/users/is-admin-allowed-user?username=' + this.postAndUser.post.username, this.httpOptions)
+    this.http.get<boolean>('https://wws-edge-service.herokuapp.com/users/is-admin-allowed-user?username=' + this.postAndUser.post.username, this.httpOptions)
     .subscribe( b => this.allowedUserOrAdmin = b );
   }
 
@@ -63,7 +63,7 @@ export class PostCardComponent implements OnInit {
       }
     });
     this.http.
-    put<void>('http://localhost:8080/posts/increment/' + this.postAndUser.post.id + '?username=' + this.username,
+    put<void>('https://wws-edge-service.herokuapp.com/posts/increment/' + this.postAndUser.post.id + '?username=' + this.username,
     params,
     this.httpOptions).subscribe();
     this.postAndUser.post.karma ++;
@@ -78,7 +78,7 @@ export class PostCardComponent implements OnInit {
       }
     });
     this.http.
-    put<void>('http://localhost:8080/posts/decrement/' + this.postAndUser.post.id + '?username=' + this.username,
+    put<void>('https://wws-edge-service.herokuapp.com/posts/decrement/' + this.postAndUser.post.id + '?username=' + this.username,
     params,
     this.httpOptions).subscribe();
     this.postAndUser.post.karma --;
@@ -90,7 +90,7 @@ export class PostCardComponent implements OnInit {
   }
 
   deletePost(){
-    this.http.delete<void>('http://localhost:8080/posts/' + this.postAndUser.post.id
+    this.http.delete<void>('https://wws-edge-service.herokuapp.com/posts/' + this.postAndUser.post.id
     + '?username=' + localStorage.getItem('username'), this.httpOptions).subscribe();
     this.postEmiter.emit(this.postAndUser.post.id);
   }

@@ -1,7 +1,7 @@
 package com.ironhack.cityservice.service;
 
 import com.ironhack.cityservice.dto.CityCreate;
-import com.ironhack.cityservice.dto.DescriptionDto;
+//import com.ironhack.cityservice.dto.DescriptionDto;
 import com.ironhack.cityservice.exception.InputNotAllowed;
 import com.ironhack.cityservice.model.City;
 import com.ironhack.cityservice.repository.CityRepository;
@@ -30,23 +30,27 @@ public class CityService {
                 .orElseThrow(()-> new InputNotAllowed(cityId + " doesn't exist"));
     }
 
-    public void updateDescription(String id, DescriptionDto descriptionDto){
-        City city = cityRepository.findById(id)
-                .orElseThrow(()-> new InputNotAllowed(id + " doesn't exist"));
-        city.setDescription(descriptionDto.getDescription());
-        cityRepository.save(city);
-    }
-
-    public void updatePic(String id, String pic){
-        City city = cityRepository.findById(id)
-                .orElseThrow(()-> new InputNotAllowed(id + " doesn't exist"));
-        city.setPic(pic);
-        cityRepository.save(city);
-    }
+//    public void updateDescription(String id, DescriptionDto descriptionDto){
+//        City city = cityRepository.findById(id)
+//                .orElseThrow(()-> new InputNotAllowed(id + " doesn't exist"));
+//        city.setDescription(descriptionDto.getDescription());
+//        cityRepository.save(city);
+//    }
+//
+//    public void updatePic(String id, String pic){
+//        City city = cityRepository.findById(id)
+//                .orElseThrow(()-> new InputNotAllowed(id + " doesn't exist"));
+//        city.setPic(pic);
+//        cityRepository.save(city);
+//    }
 
     public List<String> getAllCities(){
         List<String> cities = new ArrayList<String>();
         cityRepository.findAll().forEach(c -> cities.add(c.getId()));
         return cities;
+    }
+
+    public List<City> getAllCitiesObj(){
+        return cityRepository.findAll();
     }
 }

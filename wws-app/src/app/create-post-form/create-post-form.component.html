@@ -19,9 +19,6 @@
             <mat-form-field class="example-full-width" appearance="outline">
                 <mat-label>URL</mat-label>
                 <input matInput placeholder="Optional url..." formControlName="url">
-                <mat-error>
-                    Please enter an url
-                </mat-error>
             </mat-form-field>
         </div>
         <div class="field">
@@ -36,6 +33,9 @@
             <mat-form-field appearance="fill">
                 <mat-label>Textarea</mat-label>
                 <textarea matInput formControlName="content"></textarea>
+                <mat-error *ngIf="content.invalid">
+                    Min 20 characters. Max 300 characters
+                </mat-error>
             </mat-form-field>
         </div>
         <div class="field">

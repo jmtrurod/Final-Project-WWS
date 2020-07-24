@@ -1,6 +1,5 @@
 <app-navbar [mainName]="'Chat'"></app-navbar>
 <form class="somespace" [formGroup]="userForm">
-  <p>User Information: (if user id(toId) is null the message will be sended to all users) </p>
   <div class="field">
     <mat-form-field appearance="fill">
         <mat-label>Select</mat-label>
@@ -13,7 +12,7 @@
 <form [formGroup]="form" (submit)="sendMessageUsingSocket()">
   <p>Message: </p>
   <input type="text" formControlName="message" name="message" placeholder="Message">
-  <input type="submit" [disabled]="form.invalid || userForm.invalid" value="Send using socket subscription">
+  <input type="submit" [disabled]="form.invalid || userForm.invalid" value="Enviar">
 </form>
 <ul>
   <li *ngFor="let mau of messagesAndUsers">

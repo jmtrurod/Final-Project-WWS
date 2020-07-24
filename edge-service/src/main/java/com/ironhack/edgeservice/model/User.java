@@ -6,7 +6,6 @@ public class User {
     private String bio;
     private String pic;
     private String mail;
-    private int karma;
 
     public User(){}
 
@@ -16,7 +15,6 @@ public class User {
         this.bio = bio;
         this.pic = pic;
         this.mail = mail;
-        this.karma = 0;
     }
 
     public String getUsername() {
@@ -57,13 +55,5 @@ public class User {
 
     public void setMail(String mail) {
         this.mail = mail;
-    }
-
-    public int getKarma() {
-        return karma;
-    }
-
-    public void setKarma(int karma) {
-        this.karma = karma;
     }
 }
