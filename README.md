@@ -68,6 +68,7 @@ There's a lot of job left to conform a real and professional app that could have
 * When a post karma turns lower to -5 (for example), a notification should be sent admin so he could revise this post.
 * Users should register with sent-by-email key and not so easily as they can do now.
 * Profile and City portal should show posts in a Pageable way.
+* Language consistency in the app...
 * ... and better front, for sure!!
 
 ## Link
